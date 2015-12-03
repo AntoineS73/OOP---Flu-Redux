@@ -1,4 +1,4 @@
-package
+package main.alive;
 
 public class Alive {
 
