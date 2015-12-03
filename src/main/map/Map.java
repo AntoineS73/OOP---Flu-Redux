@@ -2,7 +2,11 @@ package main.map;
 
 public class Map {
 
-  public Map() {
+  int size;
+  Alive tab[];
+
+  public Map(int n) {
+    
   }
 
 }

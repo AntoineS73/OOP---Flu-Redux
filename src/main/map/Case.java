@@ -13,6 +13,19 @@ public class Case {
     this.george = alive;
   }
 
-  public 
+  public int getX() {
+    return this.x; 
+  }
 
+  public int getY() {
+    return this.y;
+  }
+
+  public Alive getGeorge() {
+    return this.george;
+  }
+
+  public void setGeorge(Alive p) {
+    this.george = p;
+  }
 }
