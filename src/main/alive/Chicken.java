@@ -1,32 +1,22 @@
 package main.alive;
 
-public class Chicken extends Animal {
+public class Chicken extends Alive {
 
-  int resistance;
-  State etat;
-  int speed;
 
-  public Human() {
-    this.resistance = 0.7 * (1 + Math.random()*(0.2) - Math.random()*(0.2));
-    this.speed = 0;
-    this.etat = State.Healthy;
+  public Chicken(double res, double spe, State sta, Disease mal) {
+    super(res, spe, sta, mal);
   }
 
-  public State getEtat() {
-    return this.etat;
+  public Chicken(double res, double spe) {
+    super(res, spe, State.Healthy, null);
   }
 
-  public int getSpeed() {
-    return this.speed;
+  public Chicken(State sta, Disease mal) {
+    super(0.5, 0, sta, mal);
   }
 
-  public int getResistance() {
-    return this.resistance;
+  public Chicken() {
+    super(0.5, 0, State.Healthy, null);
   }
-
-  public void setEtat(State e) {
-    this.etat = e;
-  }
-
 
 }

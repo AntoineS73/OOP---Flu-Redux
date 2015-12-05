@@ -1,5 +1,5 @@
-package
+package main;
 
 public enum State {
-  Healthy, Sick, Contagious, Recovering, Recovering;
+  Healthy, Sick, Contagious, Recovering, Dead;
 }

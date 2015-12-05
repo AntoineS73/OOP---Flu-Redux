@@ -9,8 +9,13 @@ public class Case {
   public Case(int posX, int posY, Alive alive) {
     this.x = posX;
     this.y = posY;
-    this.george = new Alive();
     this.george = alive;
+  }
+
+  public Case(int posX, int posY) {
+    this.x = posX;
+    this.y = posY;
+    this.george = null;
   }
 
   public int getX() {

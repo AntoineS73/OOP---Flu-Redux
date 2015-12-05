@@ -1,31 +1,21 @@
 package main.alive;
 
-public class Pig extends Animal {
+public class Pig extends Alive {
 
-  int resistance;
-  State etat;
-  int speed;
+  public Pig(double res, double spe, State sta, Disease mal) {
+    super(res, spe, sta, mal);
+  }
+
+  public Pig(double res, double spe) {
+    super(res, spe, State.Healthy, null);
+  }
+
+  public Pig(State sta, Disease mal) {
+    super(0.5, 0, sta, mal);
+  }
 
   public Pig() {
-    this.resistance = 0.7 * (1 + Math.random()*(0.2) - Math.random()*(0.2));
-    this.speed = 0;
-    this.etat = State.Healthy;
-  }
-
-  public State getEtat() {
-    return this.etat;
-  }
-
-  public int getSpeed() {
-    return this.speed;
-  }
-
-  public int getResistance() {
-    return this.resistance;
-  }
-
-  public void setEtat(State e) {
-    this.etat = e;
+    super(0.5, 0, State.Healthy, null);
   }
 
 
