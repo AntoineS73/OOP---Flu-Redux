@@ -1,5 +1,8 @@
 package main.alive;
 
+import main.*;
+import main.disease.*;
+
 public class Chicken extends Alive {
 
 
@@ -8,7 +11,7 @@ public class Chicken extends Alive {
   }
 
   public Chicken(double res, double spe) {
-    super(res, spe, State.Healthy, null);
+    super(res, spe, State.Healthy, new NullDisease());
   }
 
   public Chicken(State sta, Disease mal) {
@@ -16,7 +19,7 @@ public class Chicken extends Alive {
   }
 
   public Chicken() {
-    super(0.5, 0, State.Healthy, null);
+    super(0.5, 0, State.Healthy, new NullDisease());
   }
 
 }

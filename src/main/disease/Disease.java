@@ -6,7 +6,7 @@ public class Disease {
   private double incubation;     //incubation passage porteur-->malade
   private double virulence;      //virulence passage malade-->mort
   private double recovery;       //récupération passage malade-->santé
-  private double evolution;       //caracthère évolutif
+  private double evolution;      //caracthère évolutif
 
   public Disease(double con, double inc, double vir, double rec, double evolution, double evo) {
     this.contagiousness = con;
@@ -36,19 +36,17 @@ public class Disease {
     return this.evolution;
   }
 
-  public Disease Mutation() {
-    double con = this.contagiousness + Math.random()*(this.evolution) - Math.random()*(this.evolution);
-    double inc = this.incubation + Math.random()*(this.evolution) - Math.random()*(this.evolution);
-    double vir = this.virulence + Math.random()*(this.evolution) - Math.random()*(this.evolution);
-    double rec = this.recover + Math.random()*(this.evolution) - Math.random()*(this.evolution);
-    double evo = this.evolution + Math.random()*(this.evolution * 0.1) - Math.random()*(this.evolution * 0.1);
-    if (con < 0) {con = 0;}
-    if (inc < 0) {inc = 0;}
-    if (vir < 0) {vir = 0;}
-    if (rec < 0) {rec = 0;}
-    if (evo < 0) {evo = 0;}
-    Disease newDisease = new Disease(con, inc, vir, rec, evo);
-    return newDisease;
+  public void Mutation() {
+    this.contagiousness = this.contagiousness + Math.random()*(this.evolution) - Math.random()*(this.evolution);
+    this.incubation = this.incubation + Math.random()*(this.evolution) - Math.random()*(this.evolution);
+    this.virulence = this.virulence + Math.random()*(this.evolution) - Math.random()*(this.evolution);
+    this.recovery = this.recovery + Math.random()*(this.evolution) - Math.random()*(this.evolution);
+    this.evolution = this.evolution + Math.random()*(this.evolution * 0.1) - Math.random()*(this.evolution * 0.1);
+    if (this.contagiousness < 0) {this.contagiousness = 0;}
+    if (this.incubation < 0) {this.incubation = 0;}
+    if (this.virulence < 0) {this.virulence = 0;}
+    if (this.recovery < 0) {this.recovery = 0;}
+    if (this.evolution < 0) {this.evolution = 0;}
   }
 
 }

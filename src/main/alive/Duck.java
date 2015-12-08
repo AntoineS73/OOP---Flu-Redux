@@ -1,5 +1,8 @@
 package main.alive;
 
+import main.*;
+import main.disease.*;
+
 public class Duck extends Alive {
 
   public Duck(double res, double spe, State sta, Disease mal) {
@@ -7,7 +10,7 @@ public class Duck extends Alive {
   }
 
   public Duck(double res, double spe) {
-    super(res, spe, State.Healthy, null);
+    super(res, spe, State.Healthy, new NullDisease());
   }
 
   public Duck(State sta, Disease mal) {
@@ -15,7 +18,7 @@ public class Duck extends Alive {
   }
 
   public Duck() {
-    super(0.5, 0, State.Healthy, null);
+    super(0.5, 0, State.Healthy, new NullDisease());
   }
 
 }

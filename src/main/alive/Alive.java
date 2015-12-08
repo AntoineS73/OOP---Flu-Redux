@@ -1,5 +1,8 @@
 package main.alive;
 
+import main.*;
+import main.disease.*;
+
 public class Alive {
 
   double resistance;
@@ -15,7 +18,7 @@ public class Alive {
   }
 
   public Alive(double res, double spe) {
-    this(res, spe, State.Healthy, null);
+    this(res, spe, State.Healthy, new NullDisease());
   }
 
   public State getEtat() {
@@ -31,7 +34,7 @@ public class Alive {
   }
 
   public Disease getMaladie() {
-    return this.maladie
+    return this.maladie;
   }
 
   public void setEtat(State e) {

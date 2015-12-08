@@ -1,5 +1,8 @@
 package main.alive;
 
+import main.*;
+import main.disease.*;
+
 public class Human extends Alive {
 
   public Human(double res, double spe, State sta, Disease mal) {
@@ -7,7 +10,7 @@ public class Human extends Alive {
   }
 
   public Human(double res, double spe) {
-    super(res, spe, State.Healthy, null);
+    super(res, spe, State.Healthy, new NullDisease());
   }
 
   public Human(State sta, Disease mal) {
@@ -15,7 +18,13 @@ public class Human extends Alive {
   }
 
   public Human() {
-    super(0.7, 1, State.Healthy, mal);
+    super(0.7, 1, State.Healthy, new NullDisease());
+  }
+
+  public static void main(String[] argv) {
+    Alive george = new Human();
+    System.out.println(george.getResistance());
+    System.out.println(george.getSpeed());
   }
 
 }

@@ -1,5 +1,9 @@
 package main.map;
 
+import main.*;
+import main.alive.*;
+import main.disease.*;
+
 public class Case {
 
   int x;
@@ -15,7 +19,7 @@ public class Case {
   public Case(int posX, int posY) {
     this.x = posX;
     this.y = posY;
-    this.george = null;
+    this.george = new NullAlive();
   }
 
   public int getX() {
