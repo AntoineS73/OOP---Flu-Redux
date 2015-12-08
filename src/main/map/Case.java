@@ -1,6 +1,5 @@
 package main.map;
 
-import main.*;
 import main.alive.*;
 import main.disease.*;
 

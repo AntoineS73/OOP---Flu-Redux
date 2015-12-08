@@ -1,6 +1,5 @@
 package main.alive;
 
-import main.*;
 import main.disease.*;
 
 public class Human extends Alive {
