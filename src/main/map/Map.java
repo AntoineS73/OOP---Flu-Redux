@@ -12,7 +12,6 @@ public class Map {
     private Case tab[][];
 
     /**
-     *
      * @param n
      */
     public Map(int n) {
@@ -28,7 +27,6 @@ public class Map {
     }
 
     /**
-     *
      * @return
      */
     public Case[][] getMap() {
@@ -36,7 +34,6 @@ public class Map {
     }
 
     /**
-     *
      * @param x
      * @param y
      * @return
@@ -46,7 +43,6 @@ public class Map {
     }
 
     /**
-     *
      * @param cellule
      * @param sta
      * @return
@@ -149,25 +145,5 @@ public class Map {
         return counter;
     }
 
-    /**
-     *
-     * @param argv
-     */
-    public static void main(String[] argv) {
-        Map map = new Map(100);
-        map.getCase(1, 1).setGeorge(new NullAlive());
-        System.out.println(map.counterState(map.getCase(0, 0), State.Healthy));
-        System.out.println(map.counterState(map.getCase(99, 0), State.Healthy));
-        System.out.println(map.counterState(map.getCase(0, 99), State.Healthy));
-        System.out.println(map.counterState(map.getCase(99, 99), State.Healthy));
-        System.out.println(map.counterState(map.getCase(0, 50), State.Healthy));
-        System.out.println(map.counterState(map.getCase(99, 50), State.Healthy));
-        System.out.println(map.counterState(map.getCase(50, 99), State.Healthy));
-        System.out.println(map.counterState(map.getCase(50, 0), State.Healthy));
-        System.out.println(map.counterState(map.getCase(50, 50), State.Healthy));
-        System.out.println("ok");
-        System.out.println(map.counterState(map.getCase(50, 50), State.Dead));
-        System.out.println(map.counterState(map.getCase(0, 0), State.NullState));
-    }
 
 }
