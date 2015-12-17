@@ -4,10 +4,10 @@ import main.disease.*;
 
 public class Alive {
 
-    double resistance;
-    State etat;
-    Disease maladie;
-    double speed;
+    private double resistance;
+    private State etat;
+    private Disease maladie;
+    private double speed;
 
     public Alive(double res, double spe, State sta, Disease mal) {
         this.resistance = res * (1 + Math.random() * (0.2) - Math.random() * (0.2));

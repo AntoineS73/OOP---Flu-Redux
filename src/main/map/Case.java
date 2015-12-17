@@ -8,9 +8,9 @@ import main.disease.*;
  */
 public class Case {
 
-    int x;
-    int y;
-    Alive george;
+    private int x;
+    private int y;
+    private Alive george;
 
     /**
      *

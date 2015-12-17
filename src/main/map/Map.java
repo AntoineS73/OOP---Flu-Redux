@@ -51,9 +51,7 @@ public class Map {
       insert(Pig.class, nbrPig);
       insert(Duck.class, nbrDuck);
       insert(Chicken.class, nbrChicken);
-
       System.out.println("\nCreation de la map : 25% \n");
-
       for (int i = 0; i < (int) (0.4 * this.size);) {
          int x = (int) (Math.random() * (this.size));
          int y = (int) (Math.random() * (this.size));
@@ -62,9 +60,7 @@ public class Map {
            i++;
          }
       }
-     
       System.out.println("Creation de la map : 50% \n");
-
       for (int i = 0; i < (nbrHuman - (int) (0.4 * this.size));) {
          int x = (int) (Math.random() * (this.size));
          int y = (int) (Math.random() * (this.size));
@@ -73,9 +69,7 @@ public class Map {
            i++;
          }
       }
-   
       System.out.println("Creation de la map : 100% \n");
-
     }
 
 
@@ -94,6 +88,116 @@ public class Map {
          }
       }
     }
+
+    public void move(Case cellule) {
+      int x = cellule.getX();
+      int y = cellule.getY();
+      Alive george = cellule.getGeorge();
+      for (int i = -1; i < 2; i++) {
+        for (int j = -1; j < 2; j++) {
+        } 
+      }
+    }
+
+    public int caseEmpty(Case cellule, State sta) {
+        int x = cellule.getX();
+        int y = cellule.getY();
+	ArrayList<int> list = new ArrayList<int>();
+
+        if (x == 0 && y == 0) {
+            if (this.tab[0][1].getGeorge().equals(new NullAlive))
+                list.add(0 * this.size + 1);
+            if (this.tab[1][0].getGeorge().equals(new NullAlive))
+                list.add(1 * this.size + 0);
+            if (this.tab[1][1].getGeorge().getEtat().equals(sta))
+                list.add(1 * this.size + 1);
+        } else if (x == this.size - 1 && y == 0) {
+            if (this.tab[0][this.size - 2].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[1][this.size - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[1][this.size - 2].getGeorge().getEtat().equals(sta))
+                counter++;
+        } else if (x == 0 && y == this.size - 1) {
+            if (this.tab[this.size - 1][1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 2][0].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 2][1].getGeorge().getEtat().equals(sta))
+                counter++;
+        } else if (x == this.size - 1 && y == this.size - 1) {
+            if (this.tab[this.size - 2][this.size - 2].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 1][this.size - 2].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 2][this.size - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+        } else if (y == 0) {
+            if (this.tab[0][x - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[0][x + 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[1][x - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[1][x].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[1][x + 1].getGeorge().getEtat().equals(sta))
+                counter++;
+        } else if (y == this.size - 1) {
+            if (this.tab[this.size - 1][x - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 1][x + 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 2][x - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 2][x].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[this.size - 2][x + 1].getGeorge().getEtat().equals(sta))
+                counter++;
+        } else if (x == 0) {
+            if (this.tab[y - 1][0].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y + 1][0].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y - 1][1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y][1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y + 1][1].getGeorge().getEtat().equals(sta))
+                counter++;
+        } else if (x == this.size - 1) {
+            if (this.tab[y - 1][this.size - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y + 1][this.size - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y - 1][this.size - 2].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y][this.size - 2].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y + 1][this.size - 2].getGeorge().getEtat().equals(sta))
+                counter++;
+        } else {
+            if (this.tab[y - 1][x - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y - 1][x].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y - 1][x + 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y][x - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y][x + 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y + 1][x - 1].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y + 1][x].getGeorge().getEtat().equals(sta))
+                counter++;
+            if (this.tab[y + 1][x + 1].getGeorge().getEtat().equals(sta))
+                counter++;
+        }
+        return counter;
+    }
+
+
 
     /**
      * @param cellule
