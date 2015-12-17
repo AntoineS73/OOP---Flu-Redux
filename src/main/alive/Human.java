@@ -42,14 +42,4 @@ public class Human extends Alive {
         super(0.7, 1, State.Healthy, new NullDisease());
     }
 
-    /**
-     *
-     * @param argv
-     */
-    public static void main(String[] argv) {
-        Alive george = new Human();
-        System.out.println(george.getResistance());
-        System.out.println(george.getSpeed());
-    }
-
 }

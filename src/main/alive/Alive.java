@@ -52,4 +52,10 @@ public class Alive {
         this.maladie = mal;
     }
 
+    public boolean equals(Alive alive) {
+      if (this.resistance == alive.getResistance() && this.speed == alive.getSpeed()
+              && this.maladie.equals(alive.getMaladie()) && this.etat.equals(alive.getEtat())) {return true;}
+      else {return false;}
+    }
+
 }

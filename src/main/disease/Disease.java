@@ -68,6 +68,14 @@ public class Disease {
         return this.evolution;
     }
 
+    public boolean equals(Disease disease) {
+        if(this.contagiousness == disease.getContagiousness() && this.incubation == disease.getIncubation()
+             && this.virulence == disease.getVirulence() && this.recovery == disease.getRecovery()
+             && this.evolution == disease.getEvolution()) {return true;}
+        else {return false;}
+
+    }
+
     /**
      *
      */

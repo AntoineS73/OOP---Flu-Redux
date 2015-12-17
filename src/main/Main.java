@@ -15,20 +15,27 @@ public class Main {
      *
      */
     public Main() {
-        this.map = new Map(100);
-        map.getCase(1, 1).setGeorge(new NullAlive());
-        System.out.println(map.counterState(map.getCase(0, 0), State.Healthy));
-        System.out.println(map.counterState(map.getCase(99, 0), State.Healthy));
-        System.out.println(map.counterState(map.getCase(0, 99), State.Healthy));
-        System.out.println(map.counterState(map.getCase(99, 99), State.Healthy));
-        System.out.println(map.counterState(map.getCase(0, 50), State.Healthy));
-        System.out.println(map.counterState(map.getCase(99, 50), State.Healthy));
-        System.out.println(map.counterState(map.getCase(50, 99), State.Healthy));
-        System.out.println(map.counterState(map.getCase(50, 0), State.Healthy));
-        System.out.println(map.counterState(map.getCase(50, 50), State.Healthy));
-        System.out.println("ok");
-        System.out.println(map.counterState(map.getCase(50, 50), State.Dead));
-        System.out.println(map.counterState(map.getCase(0, 0), State.NullState));
+        this.map = new Map(50);
+        this.map.initialMap();
+        readMap(50);
+    }
+    
+    public void readMap(int size) {
+      String str = "";
+      for (int y = 0; y < size; y++) {
+        for (int x = 0; x < size; x++) {
+          str = str + "- ";
+        }
+        str = str + "\n";
+        for (int x = 0; x < size; x++) {
+          if (this.map.getCase(y,x).getGeorge().equals(new NullAlive())) 
+            str = str + " |";
+          else 
+            str = str + "X|";
+        }
+        str = str + "\n";
+      }
+      System.out.println(str);
     }
 
     /**
