@@ -1,4 +1,4 @@
-package foxesandrabbits.graph;
+package main.map;
 
 /**
  * Represent a location in a rectangular grid.

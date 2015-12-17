@@ -1,4 +1,4 @@
-package foxesandrabbits.graph;
+package main.map;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -15,7 +15,6 @@ import java.util.Random;
 public class Field {
     // A random number generator for providing random locations.
     private static final Random rand = Randomizer.getRandom();
-
     // The depth and width of the field.
     private int depth, width;
     // Storage for the animals.

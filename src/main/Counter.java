@@ -1,4 +1,4 @@
-package foxesandrabbits.graph;
+package main;
 
 import java.awt.Color;
 

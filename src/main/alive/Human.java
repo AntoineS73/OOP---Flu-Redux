@@ -1,45 +1,126 @@
 package main.alive;
 
+import java.util.List;
+import java.util.Random;
 import main.disease.*;
-
 /**
- *
+ * A simple model of a rabbit.
+ * Rabbits age, move, breed, and die.
+ * 
+ * @author David J. Barnes and Michael Kölling
+ * @version 2011.07.31
  */
 public class Human extends Alive {
+    // Characteristics shared by all rabbits (class variables).
+
+    // The age at which a rabbit can start to breed.
+    private static final int BREEDING_AGE = 600;
+    // The age to which a rabbit can live.
+    private static final int MAX_AGE = 1500;
+    // The likelihood of a rabbit breeding.
+    private static final double BREEDING_PROBABILITY = 0.005;
+    // The maximum number of births.
+    private static final int MAX_LITTER_SIZE = 1;
+    // A shared random number generator to control breeding.
+    private static final Random rand = Randomizer.getRandom();
+    
+    // Individual characteristics (instance fields).
+    private static final double RESISTANCE_DEFAULT = 0.7;
+    private static final double SPEED_DEFAULT = 1;
+    // The rabbit's age.
+    private int age;
+
     /**
-     *
-     * @param res
-     * @param spe
-     * @param sta
-     * @param mal
+     * Create a new rabbit. A rabbit may be created with age
+     * zero (a new born) or with a random age.
+     * 
+     * @param randomAge If true, the rabbit will have a random age.
+     * @param field The field currently occupied.
+     * @param location The location within the field.
      */
-    public Human(double res, double spe, State sta, Disease mal) {
-        super(res, spe, sta, mal);
+    public Human(boolean randomAge, Field field, Location location, State sta, Disease mal) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, mal);
+        age = rand.nextInt(MAX_AGE);
+    }
+    
+    public Human(Field field, Location location) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT );
+        age = 0;
     }
 
     /**
-     *
-     * @param res
-     * @param spe
+     * This is what the rabbit does most of the time - it runs 
+     * around. Sometimes it will breed or die of old age.
+     * @param newRabbits A list to return newly born rabbits.
      */
-    public Human(double res, double spe) {
-        super(res, spe, State.Healthy, new NullDisease());
+    public void act(List<Alive> newHumans)
+    {
+        incrementAge();
+        if(isAlive()) {
+            giveBirth(newHumans);            
+            // Try to move into a free location.
+            Location newLocation = getField().freeAdjacentLocation(getLocation());
+            if(newLocation != null) {
+                setLocation(newLocation);
+            }
+            else {
+                // Overcrowding.
+                setDead();
+            }
+        }
     }
 
     /**
-     *
-     * @param sta
-     * @param mal
+     * Increase the age.
+     * This could result in the rabbit's death.
      */
-    public Human(State sta, Disease mal) {
-        super(0.7, 1, sta, mal);
+    private void incrementAge()
+    {
+        age++;
+        if(age > MAX_AGE) {
+            setDead();
+        }
+    }
+    
+    /**
+     * Check whether or not this rabbit is to give birth at this step.
+     * New births will be made into free adjacent locations.
+     * @param newRabbits A list to return newly born rabbits.
+     */
+    private void giveBirth(List<Alive> newHumans)
+    {
+        // New rabbits are born into adjacent locations.
+        // Get a list of adjacent free locations.
+        Field field = getField();
+        List<Location> free = field.getFreeAdjacentLocations(getLocation());
+        int births = breed();
+        for(int b = 0; b < births && free.size() > 0; b++) {
+            Location loc = free.remove(0);
+            Human young = new Human(field, loc);
+            newHumans.add(young);
+        }
+    }
+        
+    /**
+     * Generate a number representing the number of births,
+     * if it can breed.
+     * @return The number of births (may be zero).
+     */
+    private int breed()
+    {
+        int births = 0;
+        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+            births = rand.nextInt(MAX_LITTER_SIZE) + 1;
+        }
+        return births;
     }
 
     /**
-     *
+     * A rabbit can breed if it has reached the breeding age.
+     * @return true if the rabbit can breed, false otherwise.
      */
-    public Human() {
-        super(0.7, 1, State.Healthy, new NullDisease());
+    private boolean canBreed()
+    {
+        return age >= BREEDING_AGE;
     }
-
 }
