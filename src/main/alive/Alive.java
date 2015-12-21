@@ -2,6 +2,7 @@ package main.alive;
 
 import java.util.List;
 import main.disease.*;
+import main.map.*;
 
 /**
  * A class representing shared characteristics of animals.
@@ -36,13 +37,13 @@ public abstract class Alive {
     }
    
     public Alive(Field field, Location location, double res, double spe) {
-        this(field, location, res, spe, State.Healthy, new NullDisease());
+        this(field, location, res, spe, State.HEALTHY, new NullDisease());
     }
  
     /**
      * Make this animal act - that is: make it do
      * whatever it wants/needs to do.
-     * @param newAnimals A list to receive newly born animals.
+     * @param newAlives A list to receive newly born animals.
      */
     abstract public void act(List<Alive> newAlives);
 

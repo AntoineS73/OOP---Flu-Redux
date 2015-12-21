@@ -1,4 +1,7 @@
-package foxesandrabbits.graph;
+package main.prof;
+
+import main.Randomizer;
+import main.map.*;
 
 import java.util.List;
 import java.util.Iterator;

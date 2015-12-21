@@ -2,22 +2,26 @@ package main.alive;
 
 import java.util.List;
 import java.util.Random;
+
+import main.Randomizer;
 import main.disease.*;
+import main.map.*;
+
 /**
- * A simple model of a rabbit.
- * Rabbits age, move, breed, and die.
- * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * A simple model of a duck.
+ * Ducks age, move, breed, and die.
+ *
+ * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
+ * @version 2015.12.21
  */
 public class Duck extends Alive {
-    // Characteristics shared by all rabbits (class variables).
+    // Characteristics shared by all ducks (class variables).
 
-    // The age at which a rabbit can start to breed.
+    // The age at which a duck can start to breed.
     private static final int BREEDING_AGE = 5;
-    // The age to which a rabbit can live.
+    // The age to which a duck can live.
     private static final int MAX_AGE = 40;
-    // The likelihood of a rabbit breeding.
+    // The likelihood of a duck breeding.
     private static final double BREEDING_PROBABILITY = 0.09;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 3;
@@ -27,14 +31,14 @@ public class Duck extends Alive {
     // Individual characteristics (instance fields).
     private static final double RESISTANCE_DEFAULT = 0.5;
     private static final double SPEED_DEFAULT = 0;
-    // The rabbit's age.
+    // The duck's age.
     private int age;
 
     /**
-     * Create a new rabbit. A rabbit may be created with age
+     * Create a new duck. A duck may be created with age
      * zero (a new born) or with a random age.
      * 
-     * @param randomAge If true, the rabbit will have a random age.
+     * @param randomAge If true, the duck will have a random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -49,9 +53,9 @@ public class Duck extends Alive {
     }
 
     /**
-     * This is what the rabbit does most of the time - it runs 
+     * This is what the duck does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newDucks A list to return newly born ducks.
      */
     public void act(List<Alive> newDucks)
     {
@@ -72,7 +76,7 @@ public class Duck extends Alive {
 
     /**
      * Increase the age.
-     * This could result in the rabbit's death.
+     * This could result in the duck's death.
      */
     private void incrementAge()
     {
@@ -83,13 +87,13 @@ public class Duck extends Alive {
     }
     
     /**
-     * Check whether or not this rabbit is to give birth at this step.
+     * Check whether or not this duck is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newDucks A list to return newly born ducks.
      */
     private void giveBirth(List<Alive> newDucks)
     {
-        // New rabbits are born into adjacent locations.
+        // New ducks are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
@@ -116,8 +120,8 @@ public class Duck extends Alive {
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * A duck can breed if it has reached the breeding age.
+     * @return true if the duck can breed, false otherwise.
      */
     private boolean canBreed()
     {
