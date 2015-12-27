@@ -40,7 +40,7 @@ public abstract class Alive {
     }
    
     public Alive(Field field, Location location, double res, double spe) {
-        this(field, location, res, spe, State.Healthy, null);
+        this(field, location, res, spe, State.HEALTHY, null);
     }
  
     /**
@@ -88,7 +88,7 @@ public abstract class Alive {
      */
     public boolean isAlive()
     {
-        return !this.etat.equals(State.Dead);
+        return !this.etat.equals(State.DEAD);
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class Alive {
      */
     protected void setDead()
     {
-        this.etat = State.Dead;
+        this.etat = State.DEAD;
         if(location != null) {
             field.clear(location);
             location = null;
