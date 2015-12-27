@@ -8,20 +8,20 @@ import main.map.*;
 import main.disease.*;
 
 /**
- * A simple model of a rabbit.
- * Rabbits age, move, breed, and die.
- * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * A simple model of a Human.
+ * Humans age, move, breed, and die.
+ *
+ * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
+ * @version 2015.12.21
  */
 public class Human extends Alive {
-    // Characteristics shared by all rabbits (class variables).
+    // Characteristics shared by all humans (class variables).
 
-    // The age at which a rabbit can start to breed.
+    // The age at which a human can start to breed.
     private static final int BREEDING_AGE = 600;
-    // The age to which a rabbit can live.
+    // The age to which a human can live.
     private static final int MAX_AGE = 1500;
-    // The likelihood of a rabbit breeding.
+    // The likelihood of a human breeding.
     private static final double BREEDING_PROBABILITY = 0.005;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 1;
@@ -31,14 +31,14 @@ public class Human extends Alive {
     // Individual characteristics (instance fields).
     private static final double RESISTANCE_DEFAULT = 0.7;
     private static final double SPEED_DEFAULT = 1;
-    // The rabbit's age.
+    // The human's age.
     private int age;
 
     /**
-     * Create a new rabbit. A rabbit may be created with age
+     * Create a new human. A human may be created with age
      * zero (a new born) or with a random age.
      * 
-     * @param randomAge If true, the rabbit will have a random age.
+     * @param randomAge If true, the human will have a random age.
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
@@ -53,9 +53,9 @@ public class Human extends Alive {
     }
 
     /**
-     * This is what the rabbit does most of the time - it runs 
+     * This is what the human does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newHumans A list to return newly born humans.
      */
     public void act(List<Alive> newHumans)
     {
@@ -76,7 +76,7 @@ public class Human extends Alive {
 
     /**
      * Increase the age.
-     * This could result in the rabbit's death.
+     * This could result in the human's death.
      */
     private void incrementAge()
     {
@@ -87,13 +87,13 @@ public class Human extends Alive {
     }
     
     /**
-     * Check whether or not this rabbit is to give birth at this step.
+     * Check whether or not this human is to give birth at this step.
      * New births will be made into free adjacent locations.
-     * @param newRabbits A list to return newly born rabbits.
+     * @param newHumans A list to return newly born humans.
      */
     private void giveBirth(List<Alive> newHumans)
     {
-        // New rabbits are born into adjacent locations.
+        // New humans are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
@@ -120,8 +120,8 @@ public class Human extends Alive {
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
-     * @return true if the rabbit can breed, false otherwise.
+     * A human can breed if it has reached the breeding age.
+     * @return true if the human can breed, false otherwise.
      */
     private boolean canBreed()
     {

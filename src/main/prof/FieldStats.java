@@ -4,6 +4,9 @@ import main.map.*;
 import main.alive.*;
 import main.disease.*;
 
+import main.Counter;
+import main.map.Field;
+
 import java.util.HashMap;
 
 /**

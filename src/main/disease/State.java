@@ -4,5 +4,5 @@ package main.disease;
  *
  */
 public enum State {
-    Healthy, Sick, Contagious, Recovering, Dead;
+    HEALTHY,SICK,CONTAGIOUS,RECOVERING,DEAD;
 }
