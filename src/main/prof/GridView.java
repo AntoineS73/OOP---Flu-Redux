@@ -1,9 +1,13 @@
-package foxesandrabbits.graph;
+package main;
 
 import java.awt.*;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
+
+import main.map.*;
+import main.alive.*;
+import main.disease.*;
 
 /**
  * A graphical view of the simulation grid. The view displays a colored

@@ -1,6 +1,9 @@
 package main.alive;
 
 import java.util.List;
+
+import main.*;
+import main.map.*;
 import main.disease.*;
 
 /**
@@ -36,7 +39,7 @@ public abstract class Alive {
     }
    
     public Alive(Field field, Location location, double res, double spe) {
-        this(field, location, res, spe, State.Healthy, new NullDisease());
+        this(field, location, res, spe, State.Healthy, null);
     }
  
     /**
@@ -82,9 +85,9 @@ public abstract class Alive {
      * Check whether the animal is alive or not.
      * @return true if the animal is still alive.
      */
-    protected boolean isAlive()
+    public boolean isAlive()
     {
-        return !this.etat.equals(State.DEAD);
+        return !this.etat.equals(State.Dead);
     }
 
     /**
@@ -93,7 +96,7 @@ public abstract class Alive {
      */
     protected void setDead()
     {
-        this.etat = State.DEAD;
+        this.etat = State.Dead;
         if(location != null) {
             field.clear(location);
             location = null;

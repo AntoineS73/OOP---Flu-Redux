@@ -1,6 +1,10 @@
-package foxesandrabbits.graph;
+package main;
 
 import java.awt.Color;
+
+import main.map.*;
+import main.alive.*;
+import main.disease.*;
 
 /**
  * A graphical view of the simulation grid. This interface defines all possible
@@ -18,7 +22,7 @@ public interface SimulatorView {
      * @param color
      *            The color to be used for the given class.
      */
-    void setColor(Class animalClass, Color color);
+    void setColor(Class aliveClass, Color color);
 
     /**
      * Determine whether the simulation should continue to run.

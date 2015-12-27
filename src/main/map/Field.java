@@ -5,6 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import main.*;
+import main.alive.*;
+import main.disease.*;
+
 /**
  * Represent a rectangular grid of field positions. Each position is able to
  * store a single animal.

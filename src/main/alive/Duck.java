@@ -2,7 +2,11 @@ package main.alive;
 
 import java.util.List;
 import java.util.Random;
+
+import main.*;
+import main.map.*;
 import main.disease.*;
+
 /**
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.

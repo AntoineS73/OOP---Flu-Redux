@@ -1,8 +1,13 @@
-package foxesandrabbits.graph;
+package main;
+
+import main.map.*;
+import main.alive.*;
+import main.disease.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        new Simulator().simulate(1000);
+        Simulator s = new Simulator();
+        s.simulate(1000);
     }
 }

@@ -2,6 +2,10 @@ package main;
 
 import java.awt.Color;
 
+import main.alive.*;
+import main.map.*;
+import main.disease.*;
+
 /**
  * Provide a counter for a participant in the simulation.
  * This includes an identifying string and a count of how

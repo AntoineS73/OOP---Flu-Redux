@@ -2,7 +2,11 @@ package main.alive;
 
 import java.util.List;
 import java.util.Random;
+
+import main.*;
+import main.map.*;
 import main.disease.*;
+
 /**
  * A simple model of a rabbit.
  * Rabbits age, move, breed, and die.
@@ -18,7 +22,7 @@ public class Chicken extends Alive {
     // The age to which a rabbit can live.
     private static final int MAX_AGE = 40;
     // The likelihood of a rabbit breeding.
-    private static final double BREEDING_PROBABILITY = 0.25;
+    private static final double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 1;
     // A shared random number generator to control breeding.

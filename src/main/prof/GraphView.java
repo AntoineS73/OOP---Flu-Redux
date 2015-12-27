@@ -1,9 +1,13 @@
-package foxesandrabbits.graph;
+package main;
 
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
 import java.util.*;
+
+import main.map.*;
+import main.alive.*;
+import main.disease.*;
 
 /**
  * The GraphView provides a view of two populations of actors in the field as a
@@ -67,8 +71,8 @@ public class GraphView implements SimulatorView {
      * @param color
      *            The color to be used for the given class.
      */
-    public void setColor(Class animalClass, Color color) {
-        colors.put(animalClass, color);
+    public void setColor(Class aliveClass, Color color) {
+        colors.put(aliveClass, color);
         classes = colors.keySet();
     }
 

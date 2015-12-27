@@ -1,5 +1,9 @@
 package main.disease;
 
+import main.map.*;
+import main.alive.*;
+import main.*;
+
 /**
  *
  */

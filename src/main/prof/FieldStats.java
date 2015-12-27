@@ -1,4 +1,8 @@
-package foxesandrabbits.graph;
+package main;
+
+import main.map.*;
+import main.alive.*;
+import main.disease.*;
 
 import java.util.HashMap;
 
