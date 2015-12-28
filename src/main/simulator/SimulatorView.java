@@ -1,4 +1,4 @@
-package main;
+package main.simulator;
 
 import java.awt.Color;
 
@@ -10,14 +10,14 @@ import main.disease.*;
  * A graphical view of the simulation grid. This interface defines all possible
  * different views.
  * 
- * @author Michael Kölling and David J. Barnes
- * @version 2011.07.31
+ * @author Michael Kölling, David J. Barnes, Axel Aiello and Antoine Steyer
+ * @version 2015.12.28
  */
 public interface SimulatorView {
     /**
-     * Define a color to be used for a given class of animal.
+     * Define a color to be used for a given class of alive.
      * 
-     * @param animalClass
+     * @param aliveClass
      *            The animal's Class object.
      * @param color
      *            The color to be used for the given class.

@@ -1,21 +1,22 @@
-package main;
+package main.simulator;
 
-import java.util.Random;
-import java.util.List;
+import main.utils.Randomizer;
+import main.alive.*;
+import main.map.Field;
+import main.map.Location;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.awt.Color;
-
-import main.map.*;
-import main.alive.*;
-import main.disease.*;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A simple predator-prey simulator, based on a rectangular field containing
  * rabbits and foxes.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
+ * @version 2015.12.28
  */
 public class Simulator {
     // Constants representing configuration information for the simulation.
@@ -23,13 +24,13 @@ public class Simulator {
     private static final int DEFAULT_WIDTH = 200;
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 200;
-    // The probability that a fox will be created in any given grid position.
+    // The probability that a human will be created in any given grid position.
     private static final double HUMAN_CREATION_PROBABILITY = 0.20;
-    // The probability that a rabbit will be created in any given grid position.
+    // The probability that a duck will be created in any given grid position.
     private static final double DUCK_CREATION_PROBABILITY = 0.02;
-    // The probability that a fox will be created in any given grid position.
+    // The probability that a pig will be created in any given grid position.
     private static final double PIG_CREATION_PROBABILITY = 0.02;
-    // The probability that a rabbit will be created in any given grid position.
+    // The probability that a chicken will be created in any given grid position.
     private static final double CHICKEN_CREATION_PROBABILITY = 0.02;
 
     // List of animals in the field.

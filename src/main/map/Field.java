@@ -1,15 +1,11 @@
 package main.map;
 
-import main.Randomizer;
+import main.utils.Randomizer;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
-import main.*;
-import main.alive.*;
-import main.disease.*;
 
 /**
  * Represent a rectangular grid of field positions. Each position is able to

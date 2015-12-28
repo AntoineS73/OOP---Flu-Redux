@@ -1,4 +1,4 @@
-package main;
+package main.utils;
 
 import java.util.Random;
 
@@ -9,8 +9,8 @@ import main.disease.*;
 /**
  * Provide control over the randomization of the simulation.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
+ * @version 2015.12.28
  */
 public class Randomizer
 {

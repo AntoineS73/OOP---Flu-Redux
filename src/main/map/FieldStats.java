@@ -1,6 +1,6 @@
 package main.map;
 
-import main.Counter;
+import main.utils.Counter;
 import java.util.HashMap;
 
 /**
@@ -9,7 +9,7 @@ import java.util.HashMap;
  * object that is found within the field.
  * 
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
- * @version 2011.07.31
+ * @version 2015.12.28
  */
 public class FieldStats {
     // Counters for each type of entity (fox, rabbit, etc.) in the simulation.

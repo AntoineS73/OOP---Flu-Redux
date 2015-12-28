@@ -1,8 +1,6 @@
 package main;
 
-import main.map.*;
-import main.alive.*;
-import main.disease.*;
+import main.simulator.Simulator;
 
 public class Main {
 

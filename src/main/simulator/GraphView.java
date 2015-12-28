@@ -1,4 +1,4 @@
-package main;
+package main.simulator;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.util.*;
 
 import main.map.*;
-import main.alive.*;
-import main.disease.*;
 
 /**
  * The GraphView provides a view of two populations of actors in the field as a
@@ -15,8 +13,8 @@ import main.disease.*;
  * different classes of animals. If further animals are introduced, they will
  * not currently be displayed.
  * 
- * @author Michael Kölling and David J. Barnes
- * @version 2011.07.31
+ * @author Michael Kölling, David J. Barnes, Axel Aiello and Antoine Steyer
+ * @version 2015.12.28
  */
 public class GraphView implements SimulatorView {
     private static final Color LIGHT_GRAY = new Color(0, 0, 0, 40);
@@ -42,12 +40,6 @@ public class GraphView implements SimulatorView {
      *            The height of the plotter window (in pixles).
      * @param startMax
      *            The initial maximum value for the y axis.
-     * @param world
-     *            The world object.
-     * @param class1
-     *            The first class to be plotted.
-     * @param width
-     *            The second class to be plotted.
      */
     public GraphView(int width, int height, int startMax) {
         stats = new FieldStats();
@@ -66,7 +58,7 @@ public class GraphView implements SimulatorView {
     /**
      * Define a color to be used for a given class of animal.
      * 
-     * @param animalClass
+     * @param aliveClass
      *            The animal's Class object.
      * @param color
      *            The color to be used for the given class.

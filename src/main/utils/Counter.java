@@ -1,4 +1,4 @@
-package main;
+package main.utils;
 
 import java.awt.Color;
 
@@ -12,8 +12,8 @@ import main.disease.*;
  * many participants of this type currently exist within 
  * the simulation.
  * 
- * @author Michael Kölling and David J. Barnes
- * @version 2011.07.31
+ * @author Michael Kölling, David J. Barnes, Axel Aiello and Antoine Steyer
+ * @version 2015.12.28
  */
 public class Counter
 {

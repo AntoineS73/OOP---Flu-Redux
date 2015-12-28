@@ -3,9 +3,9 @@ package main.alive;
 import java.util.List;
 import java.util.Random;
 
-import main.*;
 import main.map.*;
 import main.disease.*;
+import main.utils.Randomizer;
 
 /**
  * A simple model of a rabbit.

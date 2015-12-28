@@ -1,4 +1,4 @@
-package main;
+package main.simulator;
 
 import java.awt.*;
 import javax.swing.*;
@@ -6,16 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import main.map.*;
-import main.alive.*;
-import main.disease.*;
 
 /**
  * A graphical view of the simulation grid. The view displays a colored
  * rectangle for each location representing its contents. Colors for each type
  * of species can be defined using the setColor method.
  * 
- * @author Michael Kölling and David J. Barnes
- * @version 2011.07.31
+ * @author Michael Kölling, David J. Barnes, Axel Aiello and Antoine Steyer
+ * @version 2015.12.28
  */
 public class GridView extends JFrame implements SimulatorView {
     // Colors used for empty locations.
