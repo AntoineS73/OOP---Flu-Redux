@@ -1,12 +1,6 @@
-package main;
-
-import main.map.*;
-import main.alive.*;
-import main.disease.*;
+package main.map;
 
 import main.Counter;
-import main.map.Field;
-
 import java.util.HashMap;
 
 /**
@@ -14,7 +8,7 @@ import java.util.HashMap;
  * field. It is flexible: it will create and maintain a counter for any class of
  * object that is found within the field.
  * 
- * @author David J. Barnes and Michael Kölling
+ * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
  * @version 2011.07.31
  */
 public class FieldStats {
@@ -79,18 +73,18 @@ public class FieldStats {
     }
 
     /**
-     * Increment the count for one class of animal.
+     * Increment the count for one class of alive.
      * 
-     * @param animalClass
+     * @param aliveClass
      *            The class of animal to increment.
      */
-    public void incrementCount(Class animalClass) {
-        Counter count = counters.get(animalClass);
+    public void incrementCount(Class aliveClass) {
+        Counter count = counters.get(aliveClass);
         if (count == null) {
             // We do not have a counter for this species yet.
             // Create one.
-            count = new Counter(animalClass.getName());
-            counters.put(animalClass, count);
+            count = new Counter(aliveClass.getName());
+            counters.put(aliveClass, count);
         }
         count.increment();
     }
@@ -124,8 +118,8 @@ public class FieldStats {
     }
 
     /**
-     * Generate counts of the number of foxes and rabbits. These are not kept up
-     * to date as foxes and rabbits are placed in the field, but only when a
+     * Generate counts of the number of alives. These are not kept up
+     * to date as alives are placed in the field, but only when a
      * request is made for the information.
      * 
      * @param field
