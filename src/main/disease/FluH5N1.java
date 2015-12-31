@@ -3,7 +3,6 @@ package main.disease;
 import main.alive.Chicken;
 import main.alive.Duck;
 import main.alive.Human;
-import main.alive.Pig;
 
 import java.util.Arrays;
 import java.util.Collections;

@@ -8,20 +8,24 @@ import main.map.Location;
 import java.util.List;
 
 /**
- * A class representing shared characteristics of animals.
+ * A class representing shared characteristics of alives.
  *
- * @author David J. Barnes and Michael Kölling
- * @version 2011.07.31
+ * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
+ * @version 2015.12.31
  */
 public abstract class Alive {
 
+    // The alive's natural resistance
     private double resistance;
-    private State etat;
-    private Disease maladie;
+    // The alive's state
+    private State state;
+    // The alive's disease
+    private Disease disease;
+    // The alive's speed
     private double speed;
-    // The animal's field.
+    // The alive's field.
     private Field field;
-    // The animal's position in the field.
+    // The alive's position in the field.
     private Location location;
 
     /**
@@ -33,8 +37,8 @@ public abstract class Alive {
     public Alive(Field field, Location location, double res, double spe, State sta, Disease mal) {
         this.resistance = res * (1 + Math.random() * (0.2) - Math.random() * (0.2));
         this.speed = spe * (1 + Math.random() * (0.2) - Math.random() * (0.2));
-        this.etat = sta;
-        this.maladie = mal;
+        this.state = sta;
+        this.disease = mal;
         this.field = field;
         setLocation(location);
     }
@@ -44,15 +48,15 @@ public abstract class Alive {
     }
 
     /**
-     * Make this animal act - that is: make it do
+     * Make this alive act - that is: make it do
      * whatever it wants/needs to do.
      *
-     * @param newAlives A list to receive newly born animals.
+     * @param newAlives A list to receive newly born alives.
      */
     abstract public void act(List<Alive> newAlives);
 
-    protected State getEtat() {
-        return this.etat;
+    protected State getState() {
+        return this.state;
     }
 
     protected double getSpeed() {
@@ -63,12 +67,12 @@ public abstract class Alive {
         return this.resistance;
     }
 
-    protected Disease getMaladie() {
-        return this.maladie;
+    protected Disease getDisease() {
+        return this.disease;
     }
 
-    protected void setEtat(State e) {
-        this.etat = e;
+    protected void setState(State e) {
+        this.state = e;
     }
 
     protected void setSpeed(double s) {
@@ -79,25 +83,25 @@ public abstract class Alive {
         this.resistance = r;
     }
 
-    protected void setMaladie(Disease mal) {
-        this.maladie = mal;
+    protected void setDisease(Disease mal) {
+        this.disease = mal;
     }
 
     /**
-     * Check whether the animal is alive or not.
+     * Check whether the "alive" is alive or not.
      *
-     * @return true if the animal is still alive.
+     * @return true if the alive is still alive.
      */
     public boolean isAlive() {
-        return !this.etat.equals(State.DEAD);
+        return !this.state.equals(State.DEAD);
     }
 
     /**
-     * Indicate that the animal is no longer alive.
+     * Indicate that the alive is no longer alive.
      * It is removed from the field.
      */
     protected void setDead() {
-        this.etat = State.DEAD;
+        this.state = State.DEAD;
         if (location != null) {
             field.clear(location);
             location = null;
@@ -106,18 +110,18 @@ public abstract class Alive {
     }
 
     /**
-     * Return the animal's location.
+     * Return the alive's location.
      *
-     * @return The animal's location.
+     * @return The alive's location.
      */
     protected Location getLocation() {
         return location;
     }
 
     /**
-     * Place the animal at the new location in the given field.
+     * Place the alive at the new location in the given field.
      *
-     * @param newLocation The animal's new location.
+     * @param newLocation The alive's new location.
      */
     protected void setLocation(Location newLocation) {
         if (location != null) {
@@ -128,9 +132,9 @@ public abstract class Alive {
     }
 
     /**
-     * Return the animal's field.
+     * Return the alive's field.
      *
-     * @return The animal's field.
+     * @return The alive's field.
      */
     protected Field getField() {
         return field;

@@ -14,7 +14,7 @@ public abstract class Disease {
     private double virulence;      //virulence passage malade-->mort
     private double recovery;       //récupération passage malade-->santé
     private double evolution;      //caractère évolutif
-    private List<Class> compatibles;
+    private List<Class> compatibles; // Liste des espèces pouvant être infectées par cette maladie
 
     /**
      * @param con
@@ -70,6 +70,11 @@ public abstract class Disease {
         return this.evolution;
     }
 
+    /**
+     * @return
+     */
+    protected List<Class> getCompatibles() { return this.compatibles; }
+
     public boolean equals(Disease disease) {
         if (this.contagiousness == disease.getContagiousness() && this.incubation == disease.getIncubation()
                 && this.virulence == disease.getVirulence() && this.recovery == disease.getRecovery()
@@ -109,8 +114,8 @@ public abstract class Disease {
 
     public boolean isCompatible(Alive alive) {
         int nbClasses = this.compatibles.size();
-        for(int i=0; i<nbClasses; i++) {
-            if(this.compatibles.get(i).equals(alive)) return true;
+        for (int i = 0; i < nbClasses; i++) {
+            if (this.compatibles.get(i).equals(alive)) return true;
         }
         return false;
     }
