@@ -77,7 +77,7 @@ public class Simulator {
         view.setColor(Duck.class, Color.GREEN);
         views.add(view);
 
-        view = new GraphView(500, 150, 500);
+        view = new GraphView(1000, 250, 500);
         view.setColor(Human.class, Color.BLACK);
         view.setColor(Pig.class, Color.BLUE);
         view.setColor(Chicken.class, Color.RED);

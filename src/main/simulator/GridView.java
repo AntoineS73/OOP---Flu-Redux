@@ -63,20 +63,20 @@ public class GridView extends JFrame implements SimulatorView {
     /**
      * Define a color to be used for a given class of animal.
      * 
-     * @param animalClass
-     *            The animal's Class object.
+     * @param aliveClass
+     *            The alive's Class object.
      * @param color
      *            The color to be used for the given class.
      */
-    public void setColor(Class animalClass, Color color) {
-        colors.put(animalClass, color);
+    public void setColor(Class aliveClass, Color color) {
+        colors.put(aliveClass, color);
     }
 
     /**
-     * @return The color to be used for a given class of animal.
+     * @return The color to be used for a given class of alive.
      */
-    private Color getColor(Class animalClass) {
-        Color col = colors.get(animalClass);
+    private Color getColor(Class aliveClass) {
+        Color col = colors.get(aliveClass);
         if (col == null) {
             // no color defined for this class
             return UNKNOWN_COLOR;
