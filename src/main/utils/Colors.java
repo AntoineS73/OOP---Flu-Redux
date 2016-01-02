@@ -1,5 +1,6 @@
 package main.utils;
 
+import main.alive.*;
 import main.disease.State;
 
 import java.awt.*;
@@ -78,6 +79,19 @@ public class Colors {
 
     public Map<State, Color> getPigColors() {
         return PigColors;
+    }
+
+    public Map<State, Color> getClassColors(Class alive) {
+        if (alive == Human.class) {
+            return HumanColors;
+        } else if (alive == Chicken.class) {
+            return ChickenColors;
+        } else if (alive == Duck.class) {
+            return DuckColors;
+        } else if (alive == Pig.class) {
+            return PigColors;
+        }
+        return null;
     }
 
 }
