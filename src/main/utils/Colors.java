@@ -3,6 +3,7 @@ package main.utils;
 import main.disease.State;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -19,34 +20,47 @@ public class Colors {
     private Map<State, Color> DuckColors;
     private Map<State, Color> PigColors;
 
+    private static final Color DARK_GRAY = new Color(84, 79, 79);
+    private static final Color DARK_GREEN = new Color(2, 154, 40);
+    private static final Color OLIVE = new Color(108, 156, 45);
+    private static final Color KAKI = new Color(70, 116, 41);
+    private static final Color NIGHT_BLUE = new Color(39, 11, 164);
+    private static final Color PURPLE = new Color(94, 53, 133);
+
+
     /**
      * Define the colors for all alives
      */
-    public Colors(){
+    public Colors() {
+
+        HumanColors = new HashMap<>();
+        ChickenColors = new HashMap<>();
+        DuckColors = new HashMap<>();
+        PigColors = new HashMap<>();
 
         // Define colors for Human's different states
-        this.HumanColors.put(State.HEALTHY, Color.BLACK);
-        this.HumanColors.put(State.SICK, Color.LIGHT_GRAY);
-        this.HumanColors.put(State.CONTAGIOUS, Color.GRAY);
-        this.HumanColors.put(State.RECOVERING, new Color(84,79,79));
+        HumanColors.put(State.HEALTHY, Color.BLACK);
+        HumanColors.put(State.SICK, Color.LIGHT_GRAY);
+        HumanColors.put(State.CONTAGIOUS, Color.GRAY);
+        HumanColors.put(State.RECOVERING, DARK_GRAY);
 
         // Define colors for Chicken's different states
-        this.ChickenColors.put(State.HEALTHY, Color.RED);
-        this.ChickenColors.put(State.SICK, Color.PINK);
-        this.ChickenColors.put(State.CONTAGIOUS, Color.ORANGE);
-        this.ChickenColors.put(State.RECOVERING, Color.MAGENTA);
+        ChickenColors.put(State.HEALTHY, Color.RED);
+        ChickenColors.put(State.SICK, Color.PINK);
+        ChickenColors.put(State.CONTAGIOUS, Color.ORANGE);
+        ChickenColors.put(State.RECOVERING, Color.MAGENTA);
 
         // Define colors for Duck's different states
-        this.DuckColors.put(State.HEALTHY, new Color(2, 154, 40));
-        this.DuckColors.put(State.SICK, new Color(108, 156, 45));
-        this.DuckColors.put(State.CONTAGIOUS, Color.GREEN);
-        this.DuckColors.put(State.RECOVERING, new Color(70, 116, 41));
+        DuckColors.put(State.HEALTHY, DARK_GREEN);
+        DuckColors.put(State.SICK, OLIVE);
+        DuckColors.put(State.CONTAGIOUS, Color.GREEN);
+        DuckColors.put(State.RECOVERING, KAKI);
 
         // Define colors for Pig's different states
-        this.PigColors.put(State.HEALTHY, new Color(39, 11, 164));
-        this.PigColors.put(State.SICK, Color.CYAN);
-        this.PigColors.put(State.CONTAGIOUS, Color.BLUE);
-        this.PigColors.put(State.RECOVERING, new Color(94, 53,133));
+        PigColors.put(State.HEALTHY, NIGHT_BLUE);
+        PigColors.put(State.SICK, Color.CYAN);
+        PigColors.put(State.CONTAGIOUS, Color.BLUE);
+        PigColors.put(State.RECOVERING, PURPLE);
     }
 
 
