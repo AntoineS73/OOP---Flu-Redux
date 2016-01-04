@@ -20,7 +20,7 @@ public class Duck extends Alive {
     // The age at which a duck can start to breed.
     private static final int BREEDING_AGE = 5;
     // The age to which a duck can live.
-    private static final int MAX_AGE = 40;
+    private static final int MAX_AGE = 140;
     // The likelihood of a duck breeding.
     private static final double BREEDING_PROBABILITY = 0.09;
     // The maximum number of births.
@@ -42,14 +42,18 @@ public class Duck extends Alive {
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Duck(boolean randomAge, Field field, Location location, State sta, Disease mal) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, mal);
+    public Duck(boolean randomAge, Field field, Location location, State sta, Disease dis) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis);
         age = rand.nextInt(MAX_AGE);
     }
     
     public Duck(Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT );
         age = 0;
+    }
+
+    public Duck(Field field, Location location, Disease disease) {
+        super(field,location,RESISTANCE_DEFAULT,SPEED_DEFAULT,State.SICK,disease);
     }
 
     /**
@@ -60,18 +64,6 @@ public class Duck extends Alive {
     public void act(List<Alive> newDucks)
     {
         incrementAge();
-        if(isAlive()) {
-            giveBirth(newDucks);            
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
     }
 
     /**

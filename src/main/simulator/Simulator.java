@@ -1,5 +1,7 @@
 package main.simulator;
 
+import main.disease.FluH1N1;
+import main.disease.FluH5N1;
 import main.utils.Randomizer;
 import main.alive.*;
 import main.map.Field;
@@ -14,16 +16,16 @@ import java.util.Random;
 /**
  * A simple predator-prey simulator, based on a rectangular field containing
  * rabbits and foxes.
- * 
+ *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
  * @version 2015.12.28
  */
 public class Simulator {
     // Constants representing configuration information for the simulation.
     // The default width for the grid.
-    private static final int DEFAULT_WIDTH = 200;
+    private static final int DEFAULT_WIDTH = 100;
     // The default depth of the grid.
-    private static final int DEFAULT_DEPTH = 200;
+    private static final int DEFAULT_DEPTH = 100;
     // The probability that a human will be created in any given grid position.
     private static final double HUMAN_CREATION_PROBABILITY = 0.20;
     // The probability that a duck will be created in any given grid position.
@@ -32,6 +34,10 @@ public class Simulator {
     private static final double PIG_CREATION_PROBABILITY = 0.02;
     // The probability that a chicken will be created in any given grid position.
     private static final double CHICKEN_CREATION_PROBABILITY = 0.02;
+
+    private static final double DUCK_INFECTION_PROBABILITY = 0.10;
+    private static final double PIG_INFECTION_PROBABILITY = 0.10;
+    private static final double CHICKEN_INFECTION_PROBABILITY = 0.10;
 
     // List of animals in the field.
     private List<Alive> alives;
@@ -51,11 +57,9 @@ public class Simulator {
 
     /**
      * Create a simulation field with the given size.
-     * 
-     * @param depth
-     *            Depth of the field. Must be greater than zero.
-     * @param width
-     *            Width of the field. Must be greater than zero.
+     *
+     * @param depth Depth of the field. Must be greater than zero.
+     * @param width Width of the field. Must be greater than zero.
      */
     public Simulator(int depth, int width) {
         if (width <= 0 || depth <= 0) {
@@ -99,9 +103,8 @@ public class Simulator {
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
-     * 
-     * @param numSteps
-     *            The number of steps to run for.
+     *
+     * @param numSteps The number of steps to run for.
      */
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && views.get(0).isViable(field); step++) {
@@ -119,7 +122,7 @@ public class Simulator {
         // Provide space for newborn animals.
         List<Alive> newAlives = new ArrayList<>();
         // Let all rabbits act.
-        for (Iterator<Alive> it = alives.iterator(); it.hasNext();) {
+        for (Iterator<Alive> it = alives.iterator(); it.hasNext(); ) {
             Alive alive = it.next();
             alive.act(newAlives);
             if (!alive.isAlive()) {
@@ -170,16 +173,31 @@ public class Simulator {
                     alives.add(human);
                 } else if (rand.nextDouble() <= PIG_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Pig pig = new Pig(field, location);
-                    alives.add(pig);
-                }  else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
+                    if (rand.nextDouble() <= PIG_INFECTION_PROBABILITY) {
+                        Pig pig = new Pig(field, location, new FluH1N1());
+                        alives.add(pig);
+                    } else {
+                        Pig pigH = new Pig(field, location);
+                        alives.add(pigH);
+                    }
+                } else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Chicken chicken = new Chicken(field, location);
-                    alives.add(chicken);
-                }  else if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
+                    if (rand.nextDouble() <= CHICKEN_INFECTION_PROBABILITY) {
+                        Chicken chicken = new Chicken(field, location, new FluH5N1());
+                        alives.add(chicken);
+                    } else {
+                        Chicken chickenH = new Chicken(field, location);
+                        alives.add(chickenH);
+                    }
+                } else if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Duck duck = new Duck(field, location);
-                    alives.add(duck);
+                    if (rand.nextDouble() <= DUCK_INFECTION_PROBABILITY) {
+                        Duck duck = new Duck(field, location, new FluH5N1());
+                        alives.add(duck);
+                    } else {
+                        Duck duckH = new Duck(field, location);
+                        alives.add(duckH);
+                    }
                 }
                 // else leave the location empty.
             }

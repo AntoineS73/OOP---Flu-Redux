@@ -32,9 +32,6 @@ public abstract class Disease {
         this.compatibles = comp;
     }
 
-    protected Disease() {
-    }
-
     /**
      * @return
      */

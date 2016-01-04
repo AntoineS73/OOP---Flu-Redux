@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import main.alive.Alive;
 import main.map.*;
 
 /**

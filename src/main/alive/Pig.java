@@ -20,7 +20,7 @@ public class Pig extends Alive {
     // The age at which a pig can start to breed.
     private static final int BREEDING_AGE = 15;
     // The age to which a pig can live.
-    private static final int MAX_AGE = 100;
+    private static final int MAX_AGE = 140;
     // The likelihood of a pig breeding.
     private static final double BREEDING_PROBABILITY = 0.09;
     // The maximum number of births.
@@ -42,14 +42,18 @@ public class Pig extends Alive {
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Pig(boolean randomAge, Field field, Location location, State sta, Disease mal) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, mal);
+    public Pig(boolean randomAge, Field field, Location location, State sta, Disease dis) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis);
         age = rand.nextInt(MAX_AGE);
     }
     
     public Pig(Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT );
         age = 0;
+    }
+
+    public Pig(Field field, Location location, Disease disease) {
+        super(field,location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease);
     }
 
     /**
@@ -60,18 +64,6 @@ public class Pig extends Alive {
     public void act(List<Alive> newPigs)
     {
         incrementAge();
-        if(isAlive()) {
-            giveBirth(newPigs);            
-            // Try to move into a free location.
-            Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
-                setLocation(newLocation);
-            }
-            else {
-                // Overcrowding.
-                setDead();
-            }
-        }
     }
 
     /**

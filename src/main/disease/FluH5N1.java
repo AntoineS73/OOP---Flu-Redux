@@ -9,7 +9,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by Antoine on 30/12/2015.
+ *
+ *
+ * @author Axel Aiello and Antoine Steyer
+ * @version 2016.01.04
  */
 public class FluH5N1 extends Disease {
 

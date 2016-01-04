@@ -42,8 +42,8 @@ public class Human extends Alive {
      * @param field The field currently occupied.
      * @param location The location within the field.
      */
-    public Human(boolean randomAge, Field field, Location location, State sta, Disease mal) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, mal);
+    public Human(boolean randomAge, Field field, Location location, State sta, Disease dis) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis);
         age = rand.nextInt(MAX_AGE);
     }
     
@@ -69,7 +69,7 @@ public class Human extends Alive {
             }
             else {
                 // Overcrowding.
-                setDead();
+                //setDead();
             }
         }
     }
