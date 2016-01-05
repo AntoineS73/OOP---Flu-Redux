@@ -16,14 +16,15 @@ import java.util.List;
 public class FluH1N1 extends Disease {
 
     private static final double CONTAGIOUS = 0;
-    private static final double INCUBATION = 0;
+    private static final int INCUBATION_TIME = 0;
     private static final double VIRULENCE = 0;
     private static final double RECOVERY = 0;
+    private static final int RECOVERY_TIME = 0;
     private static final double EVOLUTION = 0;
     private static final List<Class> COMPATIBLE =
             Collections.unmodifiableList(Arrays.asList(Pig.class, Human.class));
 
     public FluH1N1() {
-        super(CONTAGIOUS, INCUBATION, VIRULENCE, RECOVERY, EVOLUTION, COMPATIBLE);
+        super(CONTAGIOUS, INCUBATION_TIME, VIRULENCE, RECOVERY, RECOVERY_TIME, EVOLUTION, COMPATIBLE);
     }
 }
