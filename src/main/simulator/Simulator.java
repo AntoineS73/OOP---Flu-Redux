@@ -27,7 +27,7 @@ public class Simulator {
     // The default depth of the grid.
     private static final int DEFAULT_DEPTH = 100;
     // The probability that a human will be created in any given grid position.
-    private static final double HUMAN_CREATION_PROBABILITY = 0.20;
+    private static final double HUMAN_CREATION_PROBABILITY = 0.15;
     // The probability that a duck will be created in any given grid position.
     private static final double DUCK_CREATION_PROBABILITY = 0.02;
     // The probability that a pig will be created in any given grid position.

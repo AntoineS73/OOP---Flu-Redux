@@ -24,7 +24,7 @@ public class Human extends Alive {
     // The age to which a human can live.
     private static final int MAX_AGE = 1500;
     // The likelihood of a human breeding.
-    private static final double BREEDING_PROBABILITY = 0.005;
+    private static final double BREEDING_PROBABILITY = 0.0005;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 1;
     // A shared random number generator to control breeding.
