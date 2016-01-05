@@ -142,7 +142,7 @@ public class Chicken extends Alive {
             if (aliveObject instanceof Alive) {
                 Alive alive = (Alive) aliveObject;
                 Disease disease = alive.getDisease();
-                if (disease != null && disease.isCompatible(this)) {
+                if (disease != null && disease.isCompatible(this) && alive.isContagious()) {
                     createDiseaseImmunity(disease, false);
                     if (!getImmunities().get(disease) && rand.nextDouble() <= disease.getContagiousnessRate()) {
                         setState(State.SICK);

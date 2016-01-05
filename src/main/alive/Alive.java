@@ -47,8 +47,8 @@ public abstract class Alive {
         this.field = field;
         setLocation(location);
         this.immunities = immunities;
-        this.resistance = resistance * (1 + Math.random() * (0.2) - Math.random() * (0.2));
-        this.speed = speed * (1 + Math.random() * (0.2) - Math.random() * (0.2));
+        this.resistance = resistance;
+        this.speed = speed;
         this.state = state;
         this.disease = disease;
         this.immunities = immunities;

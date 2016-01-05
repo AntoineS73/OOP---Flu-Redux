@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class FluH5N1 extends Disease {
 
-    private static final double CONTAGIOUS = 0.3;
-    private static final int INCUBATION_TIME = 23;
+    private static final double CONTAGIOUS = 0.5;
+    private static final int INCUBATION_TIME = 8;
     private static final double VIRULENCE = 0.25;
     private static final double RECOVERY = 0.5;
     private static final int RECOVERY_TIME = 10;
