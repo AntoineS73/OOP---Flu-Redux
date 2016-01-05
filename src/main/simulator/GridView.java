@@ -5,14 +5,16 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.alive.Alive;
+import main.alive.*;
+import main.disease.State;
 import main.map.*;
+import main.utils.Colors;
 
 /**
  * A graphical view of the simulation grid. The view displays a colored
  * rectangle for each location representing its contents. Colors for each type
  * of species can be defined using the setColor method.
- * 
+ *
  * @author Michael Kölling, David J. Barnes, Axel Aiello and Antoine Steyer
  * @version 2015.12.28
  */
@@ -30,20 +32,21 @@ public class GridView extends JFrame implements SimulatorView {
 
     // A map for storing colors for participants in the simulation
     private Map<Class, Color> colors;
+    // A map for storing colors for participants in the simulation
+    private Colors stateColors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
 
     /**
      * Create a view of the given width and height.
-     * 
-     * @param height
-     *            The simulation's height.
-     * @param width
-     *            The simulation's width.
+     *
+     * @param height The simulation's height.
+     * @param width  The simulation's width.
      */
     public GridView(int height, int width) {
         stats = new FieldStats();
         colors = new HashMap<>();
+        stateColors = new Colors();
 
         setTitle("Flu Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
@@ -63,11 +66,9 @@ public class GridView extends JFrame implements SimulatorView {
 
     /**
      * Define a color to be used for a given class of animal.
-     * 
-     * @param aliveClass
-     *            The alive's Class object.
-     * @param color
-     *            The color to be used for the given class.
+     *
+     * @param aliveClass The alive's Class object.
+     * @param color      The color to be used for the given class.
      */
     public void setColor(Class aliveClass, Color color) {
         colors.put(aliveClass, color);
@@ -87,12 +88,29 @@ public class GridView extends JFrame implements SimulatorView {
     }
 
     /**
+     * @return The color to be used for a given object.
+     */
+    private Color getColor(Object aliveObject) {
+        if (aliveObject instanceof Human) {
+            Human human = (Human) aliveObject;
+            return stateColors.getHumanColors().get(human.getState());
+        } else if (aliveObject instanceof Chicken) {
+            Chicken chicken = (Chicken) aliveObject;
+            return stateColors.getChickenColors().get(chicken.getState());
+        } else if (aliveObject instanceof Duck) {
+            Duck duck = (Duck) aliveObject;
+            return stateColors.getDuckColors().get(duck.getState());
+        } else if (aliveObject instanceof Pig) {
+            Pig pig = (Pig) aliveObject;
+            return stateColors.getPigColors().get(pig.getState());
+        } else return UNKNOWN_COLOR;
+    }
+
+    /**
      * Show the current status of the field.
-     * 
-     * @param step
-     *            Which iteration step it is.
-     * @param field
-     *            The field whose status is to be displayed.
+     *
+     * @param step  Which iteration step it is.
+     * @param field The field whose status is to be displayed.
      */
     public void showStatus(int step, Field field) {
         if (!isVisible()) {
@@ -109,7 +127,7 @@ public class GridView extends JFrame implements SimulatorView {
                 Object animal = field.getObjectAt(row, col);
                 if (animal != null) {
                     stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    fieldView.drawMark(col, row, getColor(animal));
                 } else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
                 }
@@ -124,7 +142,7 @@ public class GridView extends JFrame implements SimulatorView {
 
     /**
      * Determine whether the simulation should continue to run.
-     * 
+     *
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field) {

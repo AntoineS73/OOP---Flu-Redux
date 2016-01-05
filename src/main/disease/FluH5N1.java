@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *
+ * Representation of the disease H5N1
  *
  * @author Axel Aiello and Antoine Steyer
  * @version 2016.01.04

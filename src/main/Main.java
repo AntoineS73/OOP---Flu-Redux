@@ -13,6 +13,9 @@ public class Main {
 
         timer = new Timer();
         SimulateStep s = new SimulateStep(new Simulator());
-        timer.scheduleAtFixedRate(s,0,200);
+
+        timer.scheduleAtFixedRate(s, 0, 200);
+
+
     }
 }

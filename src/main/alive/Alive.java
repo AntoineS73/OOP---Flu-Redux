@@ -34,17 +34,17 @@ public abstract class Alive {
      * @param field    The field currently occupied.
      * @param location The location within the field.
      */
-    public Alive(Field field, Location location, double res, double spe, State sta, Disease mal) {
-        this.resistance = res * (1 + Math.random() * (0.2) - Math.random() * (0.2));
-        this.speed = spe * (1 + Math.random() * (0.2) - Math.random() * (0.2));
-        this.state = sta;
-        this.disease = mal;
+    public Alive(Field field, Location location, double resistance, double speed, State state, Disease disease) {
+        this.resistance = resistance * (1 + Math.random() * (0.2) - Math.random() * (0.2));
+        this.speed = speed * (1 + Math.random() * (0.2) - Math.random() * (0.2));
+        this.state = state;
+        this.disease = disease;
         this.field = field;
         setLocation(location);
     }
 
-    public Alive(Field field, Location location, double res, double spe) {
-        this(field, location, res, spe, State.HEALTHY, null);
+    public Alive(Field field, Location location, double resistance, double speed) {
+        this(field, location, resistance, speed, State.HEALTHY, null);
     }
 
     /**
@@ -55,35 +55,35 @@ public abstract class Alive {
      */
     abstract public void act(List<Alive> newAlives);
 
-    protected State getState() {
+    public State getState() {
         return this.state;
     }
 
-    protected double getSpeed() {
+    public double getSpeed() {
         return this.speed;
     }
 
-    protected double getResistance() {
+    public double getResistance() {
         return this.resistance;
     }
 
-    protected Disease getDisease() {
+    public Disease getDisease() {
         return this.disease;
     }
 
-    protected void setState(State e) {
+    public void setState(State e) {
         this.state = e;
     }
 
-    protected void setSpeed(double s) {
+    public void setSpeed(double s) {
         this.speed = s;
     }
 
-    protected void setResistance(double r) {
+    public void setResistance(double r) {
         this.resistance = r;
     }
 
-    protected void setDisease(Disease mal) {
+    public void setDisease(Disease mal) {
         this.disease = mal;
     }
 
@@ -94,6 +94,42 @@ public abstract class Alive {
      */
     public boolean isAlive() {
         return !this.state.equals(State.DEAD);
+    }
+
+    /**
+     * Check whether the "alive" is recovering or not.
+     *
+     * @return true if the alive is recovering.
+     */
+    public boolean isHealthy() {
+        return this.state.equals(State.HEALTHY);
+    }
+
+    /**
+     * Check whether the "alive" is sick or not.
+     *
+     * @return true if the alive is sick.
+     */
+    public boolean isSick() {
+        return this.state.equals(State.SICK);
+    }
+
+    /**
+     * Check whether the "alive" is contagious or not.
+     *
+     * @return true if the alive is contagious.
+     */
+    public boolean isContagious() {
+        return this.state.equals(State.CONTAGIOUS);
+    }
+
+    /**
+     * Check whether the "alive" is recovering or not.
+     *
+     * @return true if the alive is recovering.
+     */
+    public boolean isRecovering() {
+        return this.state.equals(State.RECOVERING);
     }
 
     /**

@@ -114,26 +114,45 @@ public class Simulator {
 
     /**
      * Run the simulation from its current state for a single step. Iterate over
-     * the whole field updating the state of each fox and rabbit.
+     * the whole field updating the state of each alives.
      */
     public void simulateOneStep() {
-        step++;
+        if (views.get(0).isViable(field)) {
+            step++;
 
-        // Provide space for newborn animals.
-        List<Alive> newAlives = new ArrayList<>();
-        // Let all rabbits act.
-        for (Iterator<Alive> it = alives.iterator(); it.hasNext(); ) {
-            Alive alive = it.next();
-            alive.act(newAlives);
-            if (!alive.isAlive()) {
-                it.remove();
+            // Provide space for newborn animals.
+            List<Alive> newAlives = new ArrayList<>();
+            // Let all rabbits act.
+            for (Iterator<Alive> it = alives.iterator(); it.hasNext(); ) {
+                Alive alive = it.next();
+                alive.act(newAlives);
+                if (!alive.isAlive()) {
+                    it.remove();
+                }
+            }
+
+            // Add the newly born alives to the main lists.
+            alives.addAll(newAlives);
+
+            updateViews();
+        } else {
+            // Stop the simulation
+        }
+    }
+
+    /**
+     * Determine if the simulation should continue to run
+     * Stop when all alives state is Healthy
+     *
+     * @return true if all alives are healthy
+     */
+    public boolean allHealthy() {
+        for (Alive alive : alives) {
+            if (!alive.isHealthy()) {
+                return false;
             }
         }
-
-        // Add the newly born foxes and rabbits to the main lists.
-        alives.addAll(newAlives);
-
-        updateViews();
+        return true;
     }
 
     /**
@@ -173,6 +192,7 @@ public class Simulator {
                     alives.add(human);
                 } else if (rand.nextDouble() <= PIG_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
+                    // Pigs randomly infected by H1N1
                     if (rand.nextDouble() <= PIG_INFECTION_PROBABILITY) {
                         Pig pig = new Pig(field, location, new FluH1N1());
                         alives.add(pig);
@@ -182,6 +202,7 @@ public class Simulator {
                     }
                 } else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
+                    // Chickens randomly infected by H5N1
                     if (rand.nextDouble() <= CHICKEN_INFECTION_PROBABILITY) {
                         Chicken chicken = new Chicken(field, location, new FluH5N1());
                         alives.add(chicken);
@@ -191,6 +212,7 @@ public class Simulator {
                     }
                 } else if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
+                    // Ducks randomly infected by H5N1
                     if (rand.nextDouble() <= DUCK_INFECTION_PROBABILITY) {
                         Duck duck = new Duck(field, location, new FluH5N1());
                         alives.add(duck);

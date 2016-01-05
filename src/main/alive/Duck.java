@@ -27,7 +27,7 @@ public class Duck extends Alive {
     private static final int MAX_LITTER_SIZE = 3;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
     // Individual characteristics (instance fields).
     private static final double RESISTANCE_DEFAULT = 0.5;
     private static final double SPEED_DEFAULT = 0;
@@ -37,75 +37,78 @@ public class Duck extends Alive {
     /**
      * Create a new duck. A duck may be created with age
      * zero (a new born) or with a random age.
-     * 
+     *
      * @param randomAge If true, the duck will have a random age.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
+     * @param field     The field currently occupied.
+     * @param location  The location within the field.
      */
     public Duck(boolean randomAge, Field field, Location location, State sta, Disease dis) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis);
         age = rand.nextInt(MAX_AGE);
     }
-    
+
     public Duck(Field field, Location location) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT );
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         age = 0;
     }
 
     public Duck(Field field, Location location, Disease disease) {
-        super(field,location,RESISTANCE_DEFAULT,SPEED_DEFAULT,State.SICK,disease);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease);
     }
 
     /**
      * This is what the duck does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
+     *
      * @param newDucks A list to return newly born ducks.
      */
-    public void act(List<Alive> newDucks)
-    {
+    public void act(List<Alive> newDucks) {
+
         incrementAge();
+        if (isAlive() && age == BREEDING_AGE) {
+            giveBirth(newDucks);
+        }
     }
 
     /**
      * Increase the age.
      * This could result in the duck's death.
      */
-    private void incrementAge()
-    {
+    private void incrementAge() {
         age++;
-        if(age > MAX_AGE) {
+        if (age > MAX_AGE) {
             setDead();
         }
     }
-    
+
     /**
      * Check whether or not this duck is to give birth at this step.
      * New births will be made into free adjacent locations.
+     *
      * @param newDucks A list to return newly born ducks.
      */
-    private void giveBirth(List<Alive> newDucks)
-    {
+    private void giveBirth(List<Alive> newDucks) {
         // New ducks are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
+        for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Duck young = new Duck(field, loc);
             newDucks.add(young);
         }
     }
-        
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
+     *
      * @return The number of births (may be zero).
      */
-    private int breed()
-    {
+    private int breed() {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
@@ -113,10 +116,10 @@ public class Duck extends Alive {
 
     /**
      * A duck can breed if it has reached the breeding age.
+     *
      * @return true if the duck can breed, false otherwise.
      */
-    private boolean canBreed()
-    {
+    private boolean canBreed() {
         return age >= BREEDING_AGE;
     }
 }

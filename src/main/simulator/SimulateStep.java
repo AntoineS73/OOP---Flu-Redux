@@ -6,10 +6,14 @@ public class SimulateStep extends TimerTask {
 
     private Simulator simulator;
 
-    public SimulateStep(Simulator simulator) {this.simulator = simulator;}
+    public SimulateStep(Simulator simulator) {
+        this.simulator = simulator;
+    }
 
     @Override
     public void run() {
-        simulator.simulateOneStep();
+        if (!simulator.allHealthy()) {
+            simulator.simulateOneStep();
+        }
     }
 }
