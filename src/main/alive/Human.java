@@ -1,5 +1,6 @@
 package main.alive;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -49,13 +50,13 @@ public class Human extends Alive {
      * @param nbDays    The number of days passed into the simulation
      */
     public Human(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, null);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, new HashMap<>());
         this.nbDays = nbDays;
         if (randomAge) age = rand.nextInt(MAX_AGE);
     }
 
     public Human(boolean randomAge, Field field, Location location) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.HEALTHY, null, null);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.HEALTHY, null, new HashMap<>());
         if (randomAge) age = rand.nextInt(MAX_AGE);
         nbDays = 0;
     }

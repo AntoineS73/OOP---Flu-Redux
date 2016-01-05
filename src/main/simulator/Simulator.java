@@ -188,36 +188,36 @@ public class Simulator {
             for (int col = 0; col < field.getWidth(); col++) {
                 if (rand.nextDouble() <= HUMAN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
-                    Human human = new Human(field, location);
+                    Human human = new Human(true, field, location);
                     alives.add(human);
                 } else if (rand.nextDouble() <= PIG_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     // Pigs randomly infected by H1N1
                     if (rand.nextDouble() <= PIG_INFECTION_PROBABILITY) {
-                        Pig pig = new Pig(field, location, new FluH1N1());
+                        Pig pig = new Pig(true, field, location, new FluH1N1());
                         alives.add(pig);
                     } else {
-                        Pig pigH = new Pig(field, location);
+                        Pig pigH = new Pig(true, field, location);
                         alives.add(pigH);
                     }
                 } else if (rand.nextDouble() <= CHICKEN_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     // Chickens randomly infected by H5N1
                     if (rand.nextDouble() <= CHICKEN_INFECTION_PROBABILITY) {
-                        Chicken chicken = new Chicken(field, location, new FluH5N1());
+                        Chicken chicken = new Chicken(true, field, location, new FluH5N1());
                         alives.add(chicken);
                     } else {
-                        Chicken chickenH = new Chicken(field, location);
+                        Chicken chickenH = new Chicken(true, field, location);
                         alives.add(chickenH);
                     }
                 } else if (rand.nextDouble() <= DUCK_CREATION_PROBABILITY) {
                     Location location = new Location(row, col);
                     // Ducks randomly infected by H5N1
                     if (rand.nextDouble() <= DUCK_INFECTION_PROBABILITY) {
-                        Duck duck = new Duck(field, location, new FluH5N1());
+                        Duck duck = new Duck(true, field, location, new FluH5N1());
                         alives.add(duck);
                     } else {
-                        Duck duckH = new Duck(field, location);
+                        Duck duckH = new Duck(true, field, location);
                         alives.add(duckH);
                     }
                 }

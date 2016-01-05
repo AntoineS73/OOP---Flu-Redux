@@ -5,6 +5,7 @@ import main.disease.State;
 import main.map.Field;
 import main.map.Location;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public abstract class Alive {
     }
 
     public Alive(Field field, Location location, double resistance, double speed) {
-        this(field, location, resistance, speed, State.HEALTHY, null, null);
+        this(field, location, resistance, speed, State.HEALTHY, null, new HashMap<>());
     }
 
     /**
@@ -270,6 +271,12 @@ public abstract class Alive {
         this.immunities.replace(disease, immunity);
     }
 
+    /**
+     * Create an alive's immunity for disease
+     *
+     * @param disease  The new disease discovered
+     * @param immunity The immunity for this disease
+     */
     public void createDiseaseImmunity(Disease disease, boolean immunity) {
         if (this.immunities.containsKey(disease)) setDiseaseImmunity(disease, immunity);
         else this.immunities.put(disease, immunity);

@@ -22,7 +22,7 @@ public class Pig extends Alive {
     // The age at which a pig can start to breed.
     private static final int BREEDING_AGE = 15;
     // The age to which a pig can live.
-    private static final int MAX_AGE = 140;
+    private static final int MAX_AGE = 280;
     // The likelihood of a pig breeding.
     private static final double BREEDING_PROBABILITY = 0.09;
     // The maximum number of births.
@@ -50,22 +50,28 @@ public class Pig extends Alive {
      * @param nbDays    The number of days passed into the simulation
      */
     public Pig(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, null);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, new HashMap<>());
         if (randomAge) age = rand.nextInt(MAX_AGE);
         this.nbDays = nbDays;
+    }
+
+    public Pig(boolean randomAge, Field field, Location location) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
+        if (randomAge) age = rand.nextInt(MAX_AGE);
+        nbDays = 0;
+    }
+
+    public Pig(boolean randomAge, Field field, Location location, Disease disease) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease, new HashMap<>());
+        if (randomAge) age = rand.nextInt(MAX_AGE);
+        nbDays = 0;
+        createDiseaseImmunity(disease, false);
     }
 
     public Pig(Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         age = 0;
         nbDays = 0;
-    }
-
-    public Pig(Field field, Location location, Disease disease) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease, new HashMap<>());
-        age = 0;
-        nbDays = 0;
-        createDiseaseImmunity(disease, false);
     }
 
     /**

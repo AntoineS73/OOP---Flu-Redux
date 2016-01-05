@@ -93,7 +93,7 @@ public abstract class Disease {
      */
     public boolean isCompatible(Alive alive) {
         for (Class compatible : this.compatibles) {
-            if (compatible.equals(alive)) return true;
+            if (compatible.equals(alive.getClass())) return true;
         }
         return false;
     }
