@@ -1,7 +1,7 @@
-package main.disease;
+package disease;
 
-import main.alive.Human;
-import main.alive.Pig;
+import alive.Human;
+import alive.Pig;
 
 import java.util.Arrays;
 import java.util.Collections;

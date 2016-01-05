@@ -1,7 +1,7 @@
-package main.utils;
+package utils;
 
-import main.alive.*;
-import main.disease.State;
+import alive.*;
+import disease.State;
 
 import java.awt.*;
 import java.util.HashMap;

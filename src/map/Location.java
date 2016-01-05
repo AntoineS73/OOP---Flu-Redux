@@ -1,8 +1,4 @@
-package main.map;
-
-import main.*;
-import main.alive.*;
-import main.disease.*;
+package map;
 
 /**
  * Represent a location in a rectangular grid.

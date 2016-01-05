@@ -1,10 +1,8 @@
-package main.simulator;
+package simulator;
 
 import java.awt.Color;
 
-import main.map.*;
-import main.alive.*;
-import main.disease.*;
+import map.*;
 
 /**
  * A graphical view of the simulation grid. This interface defines all possible

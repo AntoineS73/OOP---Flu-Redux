@@ -1,10 +1,4 @@
-package main.utils;
-
-import java.awt.Color;
-
-import main.alive.*;
-import main.map.*;
-import main.disease.*;
+package utils;
 
 /**
  * Provide a counter for a participant in the simulation.

@@ -1,9 +1,9 @@
-package main.alive;
+package alive;
 
-import main.disease.Disease;
-import main.disease.State;
-import main.map.Field;
-import main.map.Location;
+import disease.Disease;
+import disease.State;
+import map.Field;
+import map.Location;
 
 import java.util.HashMap;
 import java.util.List;

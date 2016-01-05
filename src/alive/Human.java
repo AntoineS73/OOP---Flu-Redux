@@ -1,13 +1,12 @@
-package main.alive;
+package alive;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import main.map.*;
-import main.disease.*;
-import main.utils.Randomizer;
+import map.*;
+import disease.*;
+import utils.Randomizer;
 
 /**
  * A simple model of a Human.

@@ -1,6 +1,6 @@
-package main.disease;
+package disease;
 
-import main.alive.Alive;
+import alive.Alive;
 
 import java.util.List;
 

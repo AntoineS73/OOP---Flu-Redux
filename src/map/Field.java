@@ -1,7 +1,7 @@
-package main.map;
+package map;
 
-import main.alive.Alive;
-import main.utils.Randomizer;
+import alive.Alive;
+import utils.Randomizer;
 
 import java.util.Collections;
 import java.util.LinkedList;

@@ -1,4 +1,4 @@
-package main.disease;
+package disease;
 
 /**
  * A enumerator class for define different states for an alive

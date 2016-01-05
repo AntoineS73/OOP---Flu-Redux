@@ -1,10 +1,6 @@
-package main.utils;
+package utils;
 
 import java.util.Random;
-
-import main.alive.*;
-import main.map.*;
-import main.disease.*;
 
 /**
  * Provide control over the randomization of the simulation.

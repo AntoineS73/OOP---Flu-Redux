@@ -1,11 +1,11 @@
-package main.simulator;
+package simulator;
 
-import main.disease.FluH1N1;
-import main.disease.FluH5N1;
-import main.utils.Randomizer;
-import main.alive.*;
-import main.map.Field;
-import main.map.Location;
+import disease.FluH1N1;
+import disease.FluH5N1;
+import utils.Randomizer;
+import alive.*;
+import map.Field;
+import map.Location;
 
 import java.awt.*;
 import java.util.ArrayList;

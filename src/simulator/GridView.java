@@ -1,14 +1,13 @@
-package main.simulator;
+package simulator;
 
 import java.awt.*;
 import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import main.alive.*;
-import main.disease.State;
-import main.map.*;
-import main.utils.Colors;
+import alive.*;
+import map.*;
+import utils.Colors;
 
 /**
  * A graphical view of the simulation grid. The view displays a colored

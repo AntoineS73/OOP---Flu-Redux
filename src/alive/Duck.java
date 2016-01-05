@@ -1,29 +1,28 @@
-package main.alive;
+package alive;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import main.map.*;
-import main.disease.*;
-import main.utils.Randomizer;
+import map.*;
+import disease.*;
+import utils.Randomizer;
 
 /**
- * A simple model of a pig.
- * pig age, move, breed, and die.
+ * A simple model of a duck.
+ * Ducks age, move, breed, and die.
  *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
- * @version 2015.01.05
+ * @version 2016.01.05
  */
-public class Pig extends Alive {
-    // Characteristics shared by all pigs (class variables).
+public class Duck extends Alive {
+    // Characteristics shared by all ducks (class variables).
 
-    // The age at which a pig can start to breed.
-    private static final int BREEDING_AGE = 15;
-    // The age to which a pig can live.
-    private static final int MAX_AGE = 280;
-    // The likelihood of a pig breeding.
+    // The age at which a duck can start to breed.
+    private static final int BREEDING_AGE = 5;
+    // The age to which a duck can live.
+    private static final int MAX_AGE = 190;
+    // The likelihood of a duck breeding.
     private static final double BREEDING_PROBABILITY = 0.09;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 3;
@@ -33,67 +32,67 @@ public class Pig extends Alive {
     // Individual characteristics (instance fields).
     private static final double RESISTANCE_DEFAULT = 0.5;
     private static final double SPEED_DEFAULT = 0;
-    // The pig's age.
+    // The duck's age.
     private int age;
     // A counter for days
     private int nbDays;
 
     /**
-     * Create a new pig. A pig may be created with age
+     * Create a new duck. A duck may be created with age
      * zero (a new born) or with a random age.
      *
-     * @param randomAge If true, the pig will have a random age.
+     * @param randomAge If true, the duck will have a random age.
      * @param field     The field currently occupied.
      * @param location  The location within the field.
-     * @param sta       The pig's state
-     * @param dis       The pig's disease
+     * @param sta       The duck's state
+     * @param dis       The duck's disease
      * @param nbDays    The number of days passed into the simulation
      */
-    public Pig(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
+    public Duck(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, new HashMap<>());
         if (randomAge) age = rand.nextInt(MAX_AGE);
         this.nbDays = nbDays;
     }
 
-    public Pig(boolean randomAge, Field field, Location location) {
+    public Duck(boolean randomAge, Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         if (randomAge) age = rand.nextInt(MAX_AGE);
         nbDays = 0;
     }
 
-    public Pig(boolean randomAge, Field field, Location location, Disease disease) {
+    public Duck(boolean randomAge, Field field, Location location, Disease disease) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease, new HashMap<>());
         if (randomAge) age = rand.nextInt(MAX_AGE);
         nbDays = 0;
         createDiseaseImmunity(disease, false);
     }
 
-    public Pig(Field field, Location location) {
+    public Duck(Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         age = 0;
         nbDays = 0;
     }
 
     /**
-     * This is what the pig does most of the time - it runs
+     * This is what the duck does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
      *
-     * @param newPigs A list to return newly born pigs.
+     * @param newDucks A list to return newly born ducks.
      */
-    public void act(List<Alive> newPigs) {
+    public void act(List<Alive> newDucks) {
 
         incrementAge();
         if (isAlive() && age == BREEDING_AGE) {
-            giveBirth(newPigs);
+            giveBirth(newDucks);
         } else if (isAlive()) {
             changeState(getState());
         }
     }
 
     /**
-     * Determine how the pig's state will change
+     * Determine how the duck's state will change
      *
-     * @param state the actual state of the pig
+     * @param state the actual state of the duck
      */
     private void changeState(State state) {
 
@@ -132,7 +131,7 @@ public class Pig extends Alive {
     }
 
     /**
-     * Determine if the pig is infected by his neighbourhoods
+     * Determine if the duck is infected by his neighbourhoods
      */
     private void infection() {
         Field field = getField();
@@ -156,7 +155,7 @@ public class Pig extends Alive {
 
     /**
      * Increase the age.
-     * This could result in the pig's death.
+     * This could result in the duck's death.
      */
     private void incrementAge() {
         age++;
@@ -166,21 +165,21 @@ public class Pig extends Alive {
     }
 
     /**
-     * Check whether or not this pig is to give birth at this step.
+     * Check whether or not this duck is to give birth at this step.
      * New births will be made into free adjacent locations.
      *
-     * @param newPigs A list to return newly born pigs.
+     * @param newDucks A list to return newly born ducks.
      */
-    private void giveBirth(List<Alive> newPigs) {
-        // New pigs are born into adjacent locations.
+    private void giveBirth(List<Alive> newDucks) {
+        // New ducks are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Pig young = new Pig(field, loc);
-            newPigs.add(young);
+            Duck young = new Duck(field, loc);
+            newDucks.add(young);
         }
     }
 
@@ -199,9 +198,9 @@ public class Pig extends Alive {
     }
 
     /**
-     * A pig can breed if it has reached the breeding age.
+     * A duck can breed if it has reached the breeding age.
      *
-     * @return true if the pig can breed, false otherwise.
+     * @return true if the duck can breed, false otherwise.
      */
     private boolean canBreed() {
         return age >= BREEDING_AGE;

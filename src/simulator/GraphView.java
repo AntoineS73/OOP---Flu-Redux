@@ -1,11 +1,11 @@
-package main.simulator;
+package simulator;
 
 import java.awt.*;
 import java.awt.image.*;
 import javax.swing.*;
 import java.util.*;
 
-import main.map.*;
+import map.*;
 
 /**
  * The GraphView provides a view of two populations of actors in the field as a

@@ -1,6 +1,6 @@
-package main.map;
+package map;
 
-import main.utils.Counter;
+import utils.Counter;
 import java.util.HashMap;
 
 /**

@@ -1,99 +1,97 @@
-package main.alive;
+package alive;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-import main.map.*;
-import main.disease.*;
-import main.utils.Randomizer;
+import map.*;
+import disease.*;
+import utils.Randomizer;
 
 /**
- * A simple model of a duck.
- * Ducks age, move, breed, and die.
+ * A simple model of a rabbit.
+ * Rabbits age, move, breed, and die.
  *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
  * @version 2016.01.05
  */
-public class Duck extends Alive {
-    // Characteristics shared by all ducks (class variables).
+public class Chicken extends Alive {
+    // Characteristics shared by all chickens (class variables).
 
-    // The age at which a duck can start to breed.
+    // The age at which a chicken can start to breed.
     private static final int BREEDING_AGE = 5;
-    // The age to which a duck can live.
-    private static final int MAX_AGE = 190;
-    // The likelihood of a duck breeding.
-    private static final double BREEDING_PROBABILITY = 0.09;
+    // The age to which a chicken can live.
+    private static final int MAX_AGE = 240;
+    // The likelihood of a rabbit breeding.
+    private static final double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births.
-    private static final int MAX_LITTER_SIZE = 3;
+    private static final int MAX_LITTER_SIZE = 1;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
 
     // Individual characteristics (instance fields).
     private static final double RESISTANCE_DEFAULT = 0.5;
     private static final double SPEED_DEFAULT = 0;
-    // The duck's age.
+    // The chicken's age.
     private int age;
     // A counter for days
     private int nbDays;
 
     /**
-     * Create a new duck. A duck may be created with age
+     * Create a new chicken. A chicken may be created with age
      * zero (a new born) or with a random age.
      *
-     * @param randomAge If true, the duck will have a random age.
+     * @param randomAge If true, the chicken will have a random age.
      * @param field     The field currently occupied.
      * @param location  The location within the field.
-     * @param sta       The duck's state
-     * @param dis       The duck's disease
+     * @param sta       The chicken's state
+     * @param dis       The chicken's disease
      * @param nbDays    The number of days passed into the simulation
      */
-    public Duck(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
+    public Chicken(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, new HashMap<>());
         if (randomAge) age = rand.nextInt(MAX_AGE);
         this.nbDays = nbDays;
     }
 
-    public Duck(boolean randomAge, Field field, Location location) {
+
+    public Chicken(boolean randomAge, Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         if (randomAge) age = rand.nextInt(MAX_AGE);
         nbDays = 0;
     }
 
-    public Duck(boolean randomAge, Field field, Location location, Disease disease) {
+    public Chicken(boolean randomAge, Field field, Location location, Disease disease) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease, new HashMap<>());
         if (randomAge) age = rand.nextInt(MAX_AGE);
         nbDays = 0;
         createDiseaseImmunity(disease, false);
     }
 
-    public Duck(Field field, Location location) {
+    public Chicken(Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         age = 0;
         nbDays = 0;
     }
 
     /**
-     * This is what the duck does most of the time - it runs
+     * This is what the chicken does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
      *
-     * @param newDucks A list to return newly born ducks.
+     * @param newChickens A list to return newly born chickens.
      */
-    public void act(List<Alive> newDucks) {
+    public void act(List<Alive> newChickens) {
 
         incrementAge();
         if (isAlive() && age == BREEDING_AGE) {
-            giveBirth(newDucks);
+            giveBirth(newChickens);
         } else if (isAlive()) {
             changeState(getState());
         }
     }
 
     /**
-     * Determine how the duck's state will change
+     * Determine how the chicken's state will change
      *
-     * @param state the actual state of the duck
+     * @param state the actual state of the chicken
      */
     private void changeState(State state) {
 
@@ -132,7 +130,7 @@ public class Duck extends Alive {
     }
 
     /**
-     * Determine if the duck is infected by his neighbourhoods
+     * Determine if the chicken is infected by his neighbourhoods
      */
     private void infection() {
         Field field = getField();
@@ -154,9 +152,10 @@ public class Duck extends Alive {
         }
     }
 
+
     /**
      * Increase the age.
-     * This could result in the duck's death.
+     * This could result in the chicken's death.
      */
     private void incrementAge() {
         age++;
@@ -166,21 +165,21 @@ public class Duck extends Alive {
     }
 
     /**
-     * Check whether or not this duck is to give birth at this step.
+     * Check whether or not this chicken is to give birth at this step.
      * New births will be made into free adjacent locations.
      *
-     * @param newDucks A list to return newly born ducks.
+     * @param newChickens A list to return newly born chickens.
      */
-    private void giveBirth(List<Alive> newDucks) {
-        // New ducks are born into adjacent locations.
+    private void giveBirth(List<Alive> newChickens) {
+        // New chickens are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
         for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
-            Duck young = new Duck(field, loc);
-            newDucks.add(young);
+            Chicken young = new Chicken(field, loc);
+            newChickens.add(young);
         }
     }
 
@@ -199,9 +198,9 @@ public class Duck extends Alive {
     }
 
     /**
-     * A duck can breed if it has reached the breeding age.
+     * A chicken can breed if it has reached the breeding age.
      *
-     * @return true if the duck can breed, false otherwise.
+     * @return true if the chicken can breed, false otherwise.
      */
     private boolean canBreed() {
         return age >= BREEDING_AGE;

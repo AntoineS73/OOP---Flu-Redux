@@ -1,8 +1,8 @@
-package main.disease;
+package disease;
 
-import main.alive.Chicken;
-import main.alive.Duck;
-import main.alive.Human;
+import alive.Chicken;
+import alive.Duck;
+import alive.Human;
 
 import java.util.Arrays;
 import java.util.Collections;

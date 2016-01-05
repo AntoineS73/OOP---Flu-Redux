@@ -1,7 +1,5 @@
-package main;
-
-import main.simulator.SimulateStep;
-import main.simulator.Simulator;
+import simulator.SimulateStep;
+import simulator.Simulator;
 
 import java.util.Timer;
 
