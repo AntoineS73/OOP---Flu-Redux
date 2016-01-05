@@ -15,11 +15,11 @@ import java.util.List;
  */
 public class FluH1N1 extends Disease {
 
-    private static final double CONTAGIOUS = 0;
-    private static final int INCUBATION_TIME = 0;
-    private static final double VIRULENCE = 0;
-    private static final double RECOVERY = 0;
-    private static final int RECOVERY_TIME = 0;
+    private static final double CONTAGIOUS = 0.5;
+    private static final int INCUBATION_TIME = 10;
+    private static final double VIRULENCE = 0.5;
+    private static final double RECOVERY = 0.1;
+    private static final int RECOVERY_TIME = 20;
     private static final double EVOLUTION = 0;
     private static final List<Class> COMPATIBLE =
             Collections.unmodifiableList(Arrays.asList(Pig.class, Human.class));

@@ -43,7 +43,7 @@ public class Human extends Alive {
      * @param location The location within the field.
      */
     public Human(boolean randomAge, Field field, Location location, State sta, Disease dis) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, null);
         age = rand.nextInt(MAX_AGE);
     }
     

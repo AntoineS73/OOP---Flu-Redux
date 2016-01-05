@@ -43,7 +43,7 @@ public class Duck extends Alive {
      * @param location  The location within the field.
      */
     public Duck(boolean randomAge, Field field, Location location, State sta, Disease dis) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, null);
         age = rand.nextInt(MAX_AGE);
     }
 
@@ -53,7 +53,7 @@ public class Duck extends Alive {
     }
 
     public Duck(Field field, Location location, Disease disease) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease, null);
     }
 
     /**
