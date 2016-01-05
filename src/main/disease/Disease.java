@@ -103,7 +103,7 @@ public abstract class Disease {
      *
      * @return the disease's contagiousness rate
      */
-    protected double getContagiousnessRate() {
+    public double getContagiousnessRate() {
         return this.contagiousnessRate;
     }
 
@@ -112,7 +112,7 @@ public abstract class Disease {
      *
      * @return the disease's incubation time
      */
-    protected int getIncubationTime() {
+    public int getIncubationTime() {
         return this.incubationTime;
     }
 
@@ -121,7 +121,7 @@ public abstract class Disease {
      *
      * @return the disease's virulence rate
      */
-    protected double getVirulenceRate() {
+    public double getVirulenceRate() {
         return this.virulenceRate;
     }
 
@@ -130,7 +130,7 @@ public abstract class Disease {
      *
      * @return the disease's recovery rate
      */
-    protected double getRecoveryRate() {
+    public double getRecoveryRate() {
         return this.recoveryRate;
     }
 
@@ -139,7 +139,7 @@ public abstract class Disease {
      *
      * @return the disease's recovery time
      */
-    protected double getRecoveryTime() {
+    public double getRecoveryTime() {
         return this.recoveryTime;
     }
 
@@ -148,7 +148,7 @@ public abstract class Disease {
      *
      * @return the disease's evolution rate
      */
-    protected double getEvolution() {
+    public double getEvolution() {
         return this.evolution;
     }
 
@@ -157,7 +157,7 @@ public abstract class Disease {
      *
      * @return the disease's compatibles list
      */
-    protected List<Class> getCompatibles() {
+    public List<Class> getCompatibles() {
         return this.compatibles;
     }
 

@@ -1,8 +1,11 @@
 package main.alive;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import main.map.*;
 import main.disease.*;
 import main.utils.Randomizer;
@@ -33,6 +36,8 @@ public class Chicken extends Alive {
     private static final double SPEED_DEFAULT = 0;
     // The chicken's age.
     private int age;
+    // A counter for days
+    private int nbDays;
 
     /**
      * Create a new chicken. A chicken may be created with age
@@ -41,19 +46,27 @@ public class Chicken extends Alive {
      * @param randomAge If true, the chicken will have a random age.
      * @param field     The field currently occupied.
      * @param location  The location within the field.
+     * @param sta       The chicken's state
+     * @param dis       The chicken's disease
+     * @param nbDays    The number of days passed into the simulation
      */
-    public Chicken(boolean randomAge, Field field, Location location, State sta, Disease dis) {
+    public Chicken(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, null);
-        age = rand.nextInt(MAX_AGE);
+        if (randomAge) age = rand.nextInt(MAX_AGE);
+        this.nbDays = nbDays;
     }
 
     public Chicken(Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         age = 0;
+        nbDays = 0;
     }
 
     public Chicken(Field field, Location location, Disease disease) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease, null);
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.SICK, disease, new HashMap<>());
+        age = 0;
+        nbDays = 0;
+        createDiseaseImmunity(disease, false);
     }
 
     /**
@@ -67,6 +80,48 @@ public class Chicken extends Alive {
         incrementAge();
         if (isAlive() && age == BREEDING_AGE) {
             giveBirth(newChickens);
+        } else if (isAlive()) {
+            changeState(getState());
+        }
+    }
+
+    /**
+     * Determine how the chicken's state will change
+     *
+     * @param state the actual state of the chicken
+     */
+    private void changeState(State state) {
+
+        switch (state) {
+            case HEALTHY:
+                break;
+            case SICK:
+                if (nbDays < getDisease().getIncubationTime()) {
+                    nbDays++;
+                } else {
+                    setState(State.CONTAGIOUS);
+                    nbDays = 0;
+                }
+                break;
+            case CONTAGIOUS:
+                if (rand.nextDouble() <= getDisease().getRecoveryRate()) {
+                    setState(State.RECOVERING);
+                    setDiseaseImmunity(getDisease(), true);
+                    nbDays = 0;
+                } else if (rand.nextDouble() <= getDisease().getVirulenceRate()) {
+                    setDead();
+                }
+                break;
+            case RECOVERING:
+                if (nbDays < getDisease().getRecoveryTime()) {
+                    nbDays++;
+                } else {
+                    setState(State.HEALTHY);
+                    nbDays = 0;
+                }
+                break;
+            case DEAD:
+                break;
         }
     }
 

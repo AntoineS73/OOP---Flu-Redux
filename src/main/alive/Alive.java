@@ -269,4 +269,8 @@ public abstract class Alive {
     public void setDiseaseImmunity(Disease disease, boolean immunity) {
         this.immunities.replace(disease, immunity);
     }
+
+    public void createDiseaseImmunity(Disease disease, boolean immunity) {
+        this.immunities.put(disease,immunity);
+    }
 }

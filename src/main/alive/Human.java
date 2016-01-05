@@ -27,50 +27,99 @@ public class Human extends Alive {
     private static final int MAX_LITTER_SIZE = 1;
     // A shared random number generator to control breeding.
     private static final Random rand = Randomizer.getRandom();
-    
+
     // Individual characteristics (instance fields).
     private static final double RESISTANCE_DEFAULT = 0.7;
     private static final double SPEED_DEFAULT = 1;
     // The human's age.
     private int age;
+    // A counter for days
+    private int nbDays;
 
     /**
      * Create a new human. A human may be created with age
      * zero (a new born) or with a random age.
-     * 
+     *
      * @param randomAge If true, the human will have a random age.
-     * @param field The field currently occupied.
-     * @param location The location within the field.
+     * @param field     The field currently occupied.
+     * @param location  The location within the field.
+     * @param sta       The human's state
+     * @param dis       The human's disease
+     * @param nbDays    The number of days passed into the simulation
      */
-    public Human(boolean randomAge, Field field, Location location, State sta, Disease dis) {
+    public Human(boolean randomAge, Field field, Location location, State sta, Disease dis, int nbDays) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, sta, dis, null);
-        age = rand.nextInt(MAX_AGE);
+        this.nbDays = nbDays;
+        if (randomAge) age = rand.nextInt(MAX_AGE);
     }
-    
+
     public Human(Field field, Location location) {
-        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT );
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         age = 0;
+        nbDays = 0;
     }
 
     /**
      * This is what the human does most of the time - it runs
      * around. Sometimes it will breed or die of old age.
+     *
      * @param newHumans A list to return newly born humans.
      */
-    public void act(List<Alive> newHumans)
-    {
+    public void act(List<Alive> newHumans) {
         incrementAge();
-        if(isAlive()) {
-            giveBirth(newHumans);            
+        if (isAlive()) {
+            giveBirth(newHumans);
             // Try to move into a free location.
             Location newLocation = getField().freeAdjacentLocation(getLocation());
-            if(newLocation != null) {
+            if (newLocation != null) {
                 setLocation(newLocation);
-            }
-            else {
+            } else {
                 // Overcrowding.
                 //setDead();
             }
+
+            changeState(getState());
+
+        }
+    }
+
+    /**
+     * Determine how the human's state will change
+     *
+     * @param state the actual state of the human
+     */
+    private void changeState(State state) {
+
+        switch (state) {
+            case HEALTHY:
+                break;
+            case SICK:
+                if (nbDays < getDisease().getIncubationTime()) {
+                    nbDays++;
+                } else {
+                    setState(State.CONTAGIOUS);
+                    nbDays = 0;
+                }
+                break;
+            case CONTAGIOUS:
+                if (rand.nextDouble() <= getDisease().getRecoveryRate()) {
+                    setState(State.RECOVERING);
+                    setDiseaseImmunity(getDisease(), true);
+                    nbDays = 0;
+                } else if (rand.nextDouble() <= getDisease().getVirulenceRate()) {
+                    setDead();
+                }
+                break;
+            case RECOVERING:
+                if (nbDays < getDisease().getRecoveryTime()) {
+                    nbDays++;
+                } else {
+                    setState(State.HEALTHY);
+                    nbDays = 0;
+                }
+                break;
+            case DEAD:
+                break;
         }
     }
 
@@ -78,42 +127,41 @@ public class Human extends Alive {
      * Increase the age.
      * This could result in the human's death.
      */
-    private void incrementAge()
-    {
+    private void incrementAge() {
         age++;
-        if(age > MAX_AGE) {
+        if (age > MAX_AGE) {
             setDead();
         }
     }
-    
+
     /**
      * Check whether or not this human is to give birth at this step.
      * New births will be made into free adjacent locations.
+     *
      * @param newHumans A list to return newly born humans.
      */
-    private void giveBirth(List<Alive> newHumans)
-    {
+    private void giveBirth(List<Alive> newHumans) {
         // New humans are born into adjacent locations.
         // Get a list of adjacent free locations.
         Field field = getField();
         List<Location> free = field.getFreeAdjacentLocations(getLocation());
         int births = breed();
-        for(int b = 0; b < births && free.size() > 0; b++) {
+        for (int b = 0; b < births && free.size() > 0; b++) {
             Location loc = free.remove(0);
             Human young = new Human(field, loc);
             newHumans.add(young);
         }
     }
-        
+
     /**
      * Generate a number representing the number of births,
      * if it can breed.
+     *
      * @return The number of births (may be zero).
      */
-    private int breed()
-    {
+    private int breed() {
         int births = 0;
-        if(canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
+        if (canBreed() && rand.nextDouble() <= BREEDING_PROBABILITY) {
             births = rand.nextInt(MAX_LITTER_SIZE) + 1;
         }
         return births;
@@ -121,10 +169,10 @@ public class Human extends Alive {
 
     /**
      * A human can breed if it has reached the breeding age.
+     *
      * @return true if the human can breed, false otherwise.
      */
-    private boolean canBreed()
-    {
+    private boolean canBreed() {
         return age >= BREEDING_AGE;
     }
 }
