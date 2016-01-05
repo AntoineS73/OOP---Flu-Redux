@@ -13,7 +13,7 @@ import main.utils.Randomizer;
  * Rabbits age, move, breed, and die.
  *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
- * @version 2015.12.21
+ * @version 2016.01.05
  */
 public class Chicken extends Alive {
     // Characteristics shared by all chickens (class variables).

@@ -11,7 +11,7 @@ import java.util.List;
  * Representation of the disease H1N1
  *
  * @author Axel Aiello and Antoine Steyer
- * @version 2016.01.04
+ * @version 2016.01.05
  */
 public class FluH1N1 extends Disease {
 

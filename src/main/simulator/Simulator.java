@@ -18,7 +18,7 @@ import java.util.Random;
  * rabbits and foxes.
  *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
- * @version 2015.12.28
+ * @version 2016.01.05
  */
 public class Simulator {
     // Constants representing configuration information for the simulation.

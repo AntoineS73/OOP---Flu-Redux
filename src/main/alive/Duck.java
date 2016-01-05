@@ -14,7 +14,7 @@ import main.utils.Randomizer;
  * Ducks age, move, breed, and die.
  *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
- * @version 2015.12.21
+ * @version 2016.01.05
  */
 public class Duck extends Alive {
     // Characteristics shared by all ducks (class variables).

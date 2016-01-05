@@ -13,7 +13,7 @@ import java.util.Map;
  * A class representing shared characteristics of alives.
  *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
- * @version 2015.12.31
+ * @version 2016.01.05
  */
 public abstract class Alive {
 
@@ -66,6 +66,7 @@ public abstract class Alive {
      * @param newAlives A list to receive newly born alives.
      */
     abstract public void act(List<Alive> newAlives);
+
 
     /**
      * Check whether the "alive" is alive or not.

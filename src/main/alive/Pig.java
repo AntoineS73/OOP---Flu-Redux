@@ -14,7 +14,7 @@ import main.utils.Randomizer;
  * pig age, move, breed, and die.
  *
  * @author David J. Barnes, Michael Kölling, Axel Aiello and Antoine Steyer
- * @version 2015.12.21
+ * @version 2015.01.05
  */
 public class Pig extends Alive {
     // Characteristics shared by all pigs (class variables).
