@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class FluH1N1 extends Disease {
 
-    private static final double CONTAGIOUS = 0.7;
+    private static final double CONTAGIOUS = 0.6;
     private static final int INCUBATION_TIME = 15;
-    private static final double VIRULENCE = 0.7;
-    private static final double RECOVERY = 0.1;
+    private static final double VIRULENCE = 0.6;
+    private static final double RECOVERY = 0.2;
     private static final int RECOVERY_TIME = 20;
     private static final double EVOLUTION = 0;
     private static final List<Class> COMPATIBLE =

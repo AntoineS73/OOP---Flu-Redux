@@ -110,7 +110,7 @@ public class Chicken extends Alive {
                 }
                 break;
             case CONTAGIOUS:
-                if (rand.nextDouble() <= getDisease().getRecoveryRate()) {
+                if (rand.nextDouble() >= getDisease().getRecoveryRate()) {
                     setState(State.RECOVERING);
                     setDiseaseImmunity(getDisease(), true);
                     nbDays = 0;
