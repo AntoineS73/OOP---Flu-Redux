@@ -1,10 +1,8 @@
 package main.alive;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
+import com.sun.org.apache.xml.internal.security.signature.ObjectContainer;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import main.map.*;
 import main.disease.*;
@@ -94,6 +92,7 @@ public class Chicken extends Alive {
 
         switch (state) {
             case HEALTHY:
+                infection();
                 break;
             case SICK:
                 if (nbDays < getDisease().getIncubationTime()) {
@@ -124,6 +123,30 @@ public class Chicken extends Alive {
                 break;
         }
     }
+
+    /**
+     * Determine if the chicken is infected by his neighbourhoods
+     */
+    private void infection() {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        for (Location loc : adjacent) {
+            Object aliveObject = field.getObjectAt(loc);
+            if (aliveObject instanceof Alive) {
+                Alive alive = (Alive) aliveObject;
+                Disease disease = alive.getDisease();
+                if (disease != null && disease.isCompatible(this)) {
+                    createDiseaseImmunity(disease, false);
+                    if (!getImmunities().get(disease) && rand.nextDouble() <= disease.getContagiousnessRate()) {
+                        setState(State.SICK);
+                        setDisease(disease);
+                    }
+                }
+
+            }
+        }
+    }
+
 
     /**
      * Increase the age.

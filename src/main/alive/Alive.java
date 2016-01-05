@@ -271,6 +271,7 @@ public abstract class Alive {
     }
 
     public void createDiseaseImmunity(Disease disease, boolean immunity) {
-        this.immunities.put(disease,immunity);
+        if (this.immunities.containsKey(disease)) setDiseaseImmunity(disease, immunity);
+        else this.immunities.put(disease, immunity);
     }
 }

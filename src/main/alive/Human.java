@@ -1,5 +1,6 @@
 package main.alive;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -53,6 +54,12 @@ public class Human extends Alive {
         if (randomAge) age = rand.nextInt(MAX_AGE);
     }
 
+    public Human(boolean randomAge, Field field, Location location) {
+        super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT, State.HEALTHY, null, null);
+        if (randomAge) age = rand.nextInt(MAX_AGE);
+        nbDays = 0;
+    }
+
     public Human(Field field, Location location) {
         super(field, location, RESISTANCE_DEFAULT, SPEED_DEFAULT);
         age = 0;
@@ -73,11 +80,7 @@ public class Human extends Alive {
             Location newLocation = getField().freeAdjacentLocation(getLocation());
             if (newLocation != null) {
                 setLocation(newLocation);
-            } else {
-                // Overcrowding.
-                //setDead();
             }
-
             changeState(getState());
 
         }
@@ -92,6 +95,7 @@ public class Human extends Alive {
 
         switch (state) {
             case HEALTHY:
+                infection();
                 break;
             case SICK:
                 if (nbDays < getDisease().getIncubationTime()) {
@@ -120,6 +124,29 @@ public class Human extends Alive {
                 break;
             case DEAD:
                 break;
+        }
+    }
+
+    /**
+     * Determine if the human is infected by his neighbourhoods
+     */
+    private void infection() {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        for (Location loc : adjacent) {
+            Object aliveObject = field.getObjectAt(loc);
+            if (aliveObject instanceof Alive) {
+                Alive alive = (Alive) aliveObject;
+                Disease disease = alive.getDisease();
+                if (disease != null && disease.isCompatible(this)) {
+                    createDiseaseImmunity(disease, false);
+                    if (!getImmunities().get(disease) && rand.nextDouble() <= disease.getContagiousnessRate()) {
+                        setState(State.SICK);
+                        setDisease(disease);
+                    }
+                }
+
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package main.alive;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -92,6 +93,7 @@ public class Pig extends Alive {
 
         switch (state) {
             case HEALTHY:
+                infection();
                 break;
             case SICK:
                 if (nbDays < getDisease().getIncubationTime()) {
@@ -120,6 +122,29 @@ public class Pig extends Alive {
                 break;
             case DEAD:
                 break;
+        }
+    }
+
+    /**
+     * Determine if the pig is infected by his neighbourhoods
+     */
+    private void infection() {
+        Field field = getField();
+        List<Location> adjacent = field.adjacentLocations(getLocation());
+        for (Location loc : adjacent) {
+            Object aliveObject = field.getObjectAt(loc);
+            if (aliveObject instanceof Alive) {
+                Alive alive = (Alive) aliveObject;
+                Disease disease = alive.getDisease();
+                if (disease != null && disease.isCompatible(this)) {
+                    createDiseaseImmunity(disease, false);
+                    if (!getImmunities().get(disease) && rand.nextDouble() <= disease.getContagiousnessRate()) {
+                        setState(State.SICK);
+                        setDisease(disease);
+                    }
+                }
+
+            }
         }
     }
 
